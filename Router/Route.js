@@ -6,6 +6,7 @@ const ControllerProjeto = require('../Controllers/ControllerProjeto');
 const ControllerTag = require('../Controllers/ControllerTag');
 const ControllerUsuario = require('../Controllers/ControllerUsuario');
 
+
 const multer = require('multer');
 const route = express.Router();
 
@@ -69,16 +70,10 @@ route.get("/TagUpdate/:id", ControllerTag.getUpdate);
 route.post("/TagUpdate", ControllerTag.postUpdate);
 route.get("/TagDelete/:id", ControllerTag.getDelete);
 
-//Controller Comentario
-route.get("/comentarioCreate", controllerComentario.getCreate);
-route.post("/comentarioCreate", controllerComentario.postCreate);
-route.get("/comentarioList", controllerComentario.getList);
-
-
 // Export router
 module.exports = route;
 
 //Controller Comentario
-route.get("/comentarioCreate", controllerComentario.getCreate);
-route.post("/comentarioCreate", controllerComentario.postCreate);
-route.get("/comentarioList", controllerComentario.getList);
+/*route.get("/comentarioCreate", ControllerComentario.getCreate);
+route.post("/comentarioCreate", ControllerComentario.postCreate);
+route.get("/comentarioList", ControllerComentario.getList);*/
