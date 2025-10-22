@@ -3,7 +3,7 @@ const handlebars = require('express-handlebars');
 const express = require('express');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
-const middlewares = require('./middlewares/middlewares');
+const middlewares = require('./Middleware/Middleware');
 const app = express();
 
 /* Setup do Express 
@@ -13,7 +13,13 @@ app.use(session({secret:'segredo', cookie:{maxAge: 60000}}));
 //app.use(cookieParser());
 */
 
-app.engine('handlebars', handlebars.engine(defaultLayout='main'));
+/* Setup do Express */
+const path = require('path');
+app.use(express.static(path.join(__dirname, 'public'))); // arquivos acessáveis pelo navegador
+app.use(session({secret:'segredo', cookie:{maxAge: 60000}}));
+//app.use(cookieParser());
+
+app.engine('handlebars', handlebars.engine({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 app.use(express.json());
