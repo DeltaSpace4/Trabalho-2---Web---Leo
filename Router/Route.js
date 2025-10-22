@@ -1,7 +1,10 @@
 const express = require('express');
 const db = require('../Config/Db');
 
-const controllerUsuario = require('../Controllers/ControllerUsuario');
+const ControllerConhecimento = require('../Controllers/ControllerConhecimento');
+const ControllerProjeto = require('../Controllers/ControllerProjeto');
+const ControllerTag = require('../Controllers/ControllerTag');
+const ControllerUsuario = require('../Controllers/ControllerUsuario');
 
 const multer = require('multer');
 const route = express.Router();
@@ -35,16 +38,36 @@ route.get("/home", function (req, res) {
 });
 
 
-route.get('/',controllerUsuario.getLogin)
-route.post("/login", controllerUsuario.postLogin);
-route.get("/logout", controllerUsuario.getLogout);
-route.get("/usuarioCreate", controllerUsuario.getCreate);
-route.post("/usuarioCreate", controllerUsuario.postCreate);
-route.get("/usuarioList", controllerUsuario.getList);
-route.get("/usuarioUpdate/:id", controllerUsuario.getUpdate);
-route.post("/usuarioUpdate", controllerUsuario.postUpdate);
-route.get("/usuarioDelete/:id", controllerUsuario.getDelete);
+route.get('/',ControllerUsuario.getLogin)
+route.post("/login", ControllerUsuario.postLogin);
+route.get("/logout", ControllerUsuario.getLogout);
+route.get("/usuarioCreate", ControllerUsuario.getCreate);
+route.post("/usuarioCreate", ControllerUsuario.postCreate);
+route.get("/usuarioList", ControllerUsuario.getList);
+route.get("/usuarioUpdate/:id", ControllerUsuario.getUpdate);
+route.post("/usuarioUpdate", ControllerUsuario.postUpdate);
+route.get("/usuarioDelete/:id", ControllerUsuario.getDelete);
 
+route.get("/ConhecimentoCreate", ControllerConhecimento.getCreate);
+route.post("/ConhecimentoCreate", ControllerConhecimento.postCreate);
+route.get("/ConhecimentoList", ControllerConhecimento.getList);
+route.get("/ConhecimentoUpdate/:id", ControllerConhecimento.getUpdate);
+route.post("/ConhecimentoUpdate", ControllerConhecimento.postUpdate);
+route.get("/ConhecimentoDelete/:id", ControllerConhecimento.getDelete);
+
+route.get("/ProjetoCreate", ControllerProjeto.getCreate);
+route.post("/ProjetoCreate", ControllerProjeto.postCreate);
+route.get("/ProjetoList", ControllerProjeto.getList);
+route.get("/ProjetoUpdate/:id", ControllerProjeto.getUpdate);
+route.post("/ProjetoUpdate", ControllerProjeto.postUpdate);
+route.get("/ProjetoDelete/:id", ControllerProjeto.getDelete);
+
+route.get("/TagCreate", ControllerTag.getCreate);
+route.post("/TagCreate", ControllerTag.postCreate);
+route.get("/TagList", ControllerTag.getList);
+route.get("/TagUpdate/:id", ControllerTag.getUpdate);
+route.post("/TagUpdate", ControllerTag.postUpdate);
+route.get("/TagDelete/:id", ControllerTag.getDelete);
 
 //Controller Comentario
 route.get("/comentarioCreate", controllerComentario.getCreate);
@@ -54,9 +77,6 @@ route.get("/comentarioList", controllerComentario.getList);
 
 // Export router
 module.exports = route;
-route.get("/receitaUpdate/:id", controllerReceita.getUpdate);
-route.post("/receitaUpdate", upload.single('imagem'), controllerReceita.postUpdate);
-route.get("/receitaDelete/:id", controllerReceita.getDelete);
 
 //Controller Comentario
 route.get("/comentarioCreate", controllerComentario.getCreate);
