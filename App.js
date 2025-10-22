@@ -1,4 +1,4 @@
-const routes = require('./Routers/route');
+const routes = require('./Router/Route');
 const handlebars = require('express-handlebars');
 const express = require('express');
 var cookieParser = require('cookie-parser');

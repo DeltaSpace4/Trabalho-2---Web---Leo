@@ -1,7 +1,7 @@
 const express = require('express');
 const db = require('../Config/Db');
 
-const controllerAluno = require('../controllers/ControllerAluno');
+const controllerAluno = require('../Controllers/ControllerAluno');
 
 const multer = require('multer');
 const route = express.Router();
@@ -35,22 +35,22 @@ route.get("/home", function (req, res) {
 });
 
 //Controller Aluno
-route.get("/", ControllerAluno.getLogin);
-route.post("/login", ControllerAluno.postLogin);
-route.get("/logout", ControllerAluno.getLogout);
+route.get("/", controllerAluno.getLogin);
+route.post("/login", controllerAluno.postLogin);
+route.get("/logout", controllerAluno.getLogout);
 
-route.get('/aluno', ControllerAluno.list);
-route.get('/aluno/cadastrar', ControllerAluno.showCreate);
-route.post('/CadastrarAluno', ControllerAluno.create);
-route.get('/aluno/ler', ControllerAluno.showRead); 
-route.post('/LerAluno', ControllerAluno.read);
+route.get('/aluno', controllerAluno.list);
+route.get('/aluno/cadastrar', controllerAluno.showCreate);
+route.post('/CadastrarAluno', controllerAluno.create);
+route.get('/aluno/ler', controllerAluno.showRead); 
+route.post('/LerAluno', controllerAluno.read);
 
-route.get('/aluno/atualizar', ControllerAluno.showUpdate);
-route.post('/AtualizarAluno', ControllerAluno.update);
+route.get('/aluno/atualizar', controllerAluno.showUpdate);
+route.post('/AtualizarAluno', controllerAluno.update);
 
-route.get('/aluno/deletar', ControllerAluno.showDelete);
-route.post('/DeletarAluno', ControllerAluno.delete);
-
+route.get('/aluno/deletar', controllerAluno.showDelete);
+route.post('/DeletarAluno', controllerAluno.delete);
+//
 
 //
 route.get("/usuarioCreate", controllerUsuario.getCreate);

@@ -15,5 +15,5 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false
     }
   });
-  return Projetos;
+  return Conhecimento;
 }
