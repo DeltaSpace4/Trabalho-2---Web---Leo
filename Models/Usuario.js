@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Aluno = sequelize.define('aluno', {
+  const Usuario = sequelize.define('usuario', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -19,9 +19,18 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false
     },
     email: {
-        type: Sequelize.STRING,
+        type: Sequelize.EMAIL,
         allowNull: false
+    },
+    tipo: { 
+        type: ENUM('aluno','admin'), 
+        allowNull: false, 
+        defaultValue: 'aluno' 
+    },
+    ativo: { 
+        type: BOOLEAN, 
+        defaultValue: true 
     }
   });
-  return Aluno;
+  return Usuario;
 }
