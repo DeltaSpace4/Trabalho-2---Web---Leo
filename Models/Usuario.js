@@ -23,12 +23,12 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false
     },
     tipo: { 
-        type: ENUM('aluno','admin'), 
+        type: Sequelize.ENUM('aluno','admin'), 
         allowNull: false, 
         defaultValue: 'aluno' 
     },
     ativo: { 
-        type: BOOLEAN, 
+        type: Sequelize.BOOLEAN, 
         defaultValue: true 
     }
   });

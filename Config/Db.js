@@ -6,7 +6,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 //////////////////////////////
-db.Aluno = require('../Models/Aluno.js')(sequelize, Sequelize);
+db.Usuario = require('../Models/Usuario.js')(sequelize, Sequelize);
 db.Projeto = require('../Models/Projeto.js')(sequelize, Sequelize);
 db.Conhecimento = require('../Models/Conhecimento.js')(sequelize, Sequelize);
 db.Tag = require('../Models/Tag.js')(sequelize, Sequelize);

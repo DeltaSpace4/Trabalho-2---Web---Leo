@@ -1,7 +1,7 @@
 const express = require('express');
 const db = require('../Config/Db');
 
-const controllerAluno = require('../Controllers/ControllerAluno');
+const controllerUsuario = require('../Controllers/ControllerUsuario');
 
 const multer = require('multer');
 const route = express.Router();
@@ -34,18 +34,10 @@ route.get("/home", function (req, res) {
     else res.redirect('/');
 });
 
-//Controller Aluno
-route.get("/", controllerAluno.getLogin);
-route.post("/login", controllerAluno.postLogin);
-route.get("/logout", controllerAluno.getLogout);
 
-route.get('/aluno', controllerAluno.list);
-route.get('/aluno/cadastrar', controllerAluno.showCreate);
-route.post('/CadastrarAluno', controllerAluno.create);
-route.get('/aluno/ler', controllerAluno.showRead); 
-// The following routes reference controllers that aren't implemented/required yet.
-// Uncomment and require their controllers when they exist.
-/*
+route.get('/',controllerUsuario.getLogin)
+route.post("/login", controllerUsuario.postLogin);
+route.get("/logout", controllerUsuario.getLogout);
 route.get("/usuarioCreate", controllerUsuario.getCreate);
 route.post("/usuarioCreate", controllerUsuario.postCreate);
 route.get("/usuarioList", controllerUsuario.getList);
@@ -58,7 +50,7 @@ route.get("/usuarioDelete/:id", controllerUsuario.getDelete);
 route.get("/comentarioCreate", controllerComentario.getCreate);
 route.post("/comentarioCreate", controllerComentario.postCreate);
 route.get("/comentarioList", controllerComentario.getList);
-*/
+
 
 // Export router
 module.exports = route;
