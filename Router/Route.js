@@ -43,16 +43,9 @@ route.get('/aluno', controllerAluno.list);
 route.get('/aluno/cadastrar', controllerAluno.showCreate);
 route.post('/CadastrarAluno', controllerAluno.create);
 route.get('/aluno/ler', controllerAluno.showRead); 
-route.post('/LerAluno', controllerAluno.read);
-
-route.get('/aluno/atualizar', controllerAluno.showUpdate);
-route.post('/AtualizarAluno', controllerAluno.update);
-
-route.get('/aluno/deletar', controllerAluno.showDelete);
-route.post('/DeletarAluno', controllerAluno.delete);
-//
-
-//
+// The following routes reference controllers that aren't implemented/required yet.
+// Uncomment and require their controllers when they exist.
+/*
 route.get("/usuarioCreate", controllerUsuario.getCreate);
 route.post("/usuarioCreate", controllerUsuario.postCreate);
 route.get("/usuarioList", controllerUsuario.getList);
@@ -60,18 +53,15 @@ route.get("/usuarioUpdate/:id", controllerUsuario.getUpdate);
 route.post("/usuarioUpdate", controllerUsuario.postUpdate);
 route.get("/usuarioDelete/:id", controllerUsuario.getDelete);
 
-//Controller Categoria
-route.get("/categoriaCreate", controllerCategoria.getCreate);
-route.post("/categoriaCreate", controllerCategoria.postCreate);
-route.get("/categoriaList", controllerCategoria.getList);
-route.get("/categoriaUpdate/:id", controllerCategoria.getUpdate);
-route.post("/categoriaUpdate", controllerCategoria.postUpdate);
-route.get("/categoriaDelete/:id", controllerCategoria.getDelete);
 
-//Controller Receita
-route.get("/receitaCreate", controllerReceita.getCreate);
-route.post("/receitaCreate",  upload.single('imagem'), controllerReceita.postCreate);
-route.get("/receitaList", controllerReceita.getList);
+//Controller Comentario
+route.get("/comentarioCreate", controllerComentario.getCreate);
+route.post("/comentarioCreate", controllerComentario.postCreate);
+route.get("/comentarioList", controllerComentario.getList);
+*/
+
+// Export router
+module.exports = route;
 route.get("/receitaUpdate/:id", controllerReceita.getUpdate);
 route.post("/receitaUpdate", upload.single('imagem'), controllerReceita.postUpdate);
 route.get("/receitaDelete/:id", controllerReceita.getDelete);
