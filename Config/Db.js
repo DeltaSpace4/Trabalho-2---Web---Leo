@@ -16,6 +16,10 @@ db.ProjetoTag = require('../Models/ProjetoTag.js')(sequelize, Sequelize);
 
 db.Projeto.belongsToMany(db.Tag, { through: db.ProjetoTag });
 db.Tag.belongsToMany(db.Projeto, { through: db.ProjetoTag });
+db.Projeto.belongsToMany(db.Usuario, { through: 'UsuarioProjetos' });
+db.Usuario.belongsToMany(db.Projeto, { through: 'UsuarioProjetos' });
+db.Conhecimento.belongsToMany(db.Usuario, { through: 'UsuarioConhecimentos' });
+db.Usuario.belongsToMany(db.Conhecimento, { through: 'UsuarioConhecimentos' });
 
 module.exports = db;
 
