@@ -30,6 +30,9 @@ module.exports = (sequelize, Sequelize) => {
     ativo: { 
         type: Sequelize.BOOLEAN, 
         defaultValue: true 
+    },
+    link: {
+        type: Sequelize.STRING
     }
   });
   return Usuario;

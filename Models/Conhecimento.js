@@ -10,8 +10,8 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false
     },
-    descricao: {
-        type: Sequelize.STRING,
+    Dominio: {
+        type: Sequelize.INTEGER,
         allowNull: false
     }
   });

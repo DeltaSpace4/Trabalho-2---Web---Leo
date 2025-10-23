@@ -32,6 +32,10 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 {{#if admin}}
                                 <a class="dropdown-item" href="/usuarioCreate">Criar</a>
+                                {{#if admin}}
+                                <a class="dropdown-item" href="/usuarioUpdate">Editar</a>
+                                {{#if admin}}
+                                <a class="dropdown-item" href="/usuarioDelete">Deletar</a>
                                 {{/if}}
                                 <a class="dropdown-item" href="/usuarioList">Listar</a>
                             </div>
@@ -39,24 +43,49 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Categorias
+                                Projetos
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 {{#if admin}}
-                                <a class="dropdown-item" href="/categoriaCreate">Criar</a>
+                                <a class="dropdown-item" href="/projetoCreate">Criar</a>
+                                {{#if admin}}
+                                <a class="dropdown-item" href="/projetoUpdate">Editar</a>
+                                {{#if admin}}
+                                <a class="dropdown-item" href="/projetoDelete">Deletar</a>
                                 {{/if}}
-                                <a class="dropdown-item" href="/categoriaList">Listar</a>
+                                <a class="dropdown-item" href="/projetoList">Listar</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Receitas
+                                Conhecimentos
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 {{#if admin}}
-                                <a class="dropdown-item" href="/receitaCreate">Criar</a>
-                                {{/if}}<a class="dropdown-item" href="/receitaList">Listar</a>
+                                <a class="dropdown-item" href="/conhecimentoCreate">Criar</a>
+                                {{#if admin}}
+                                <a class="dropdown-item" href="/conhecimentoUpdate">Editar</a>
+                                {{#if admin}}
+                                <a class="dropdown-item" href="/conhecimentoDelete">Deletar</a>
+                                {{/if}}
+                                <a class="dropdown-item" href="/conhecimentoList">Listar</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Tags
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                {{#if admin}}
+                                <a class="dropdown-item" href="/tagCreate">Criar</a>
+                                {{#if admin}}
+                                <a class="dropdown-item" href="/tagUpdate">Editar</a>
+                                {{#if admin}}
+                                <a class="dropdown-item" href="/tagDelete">Deletar</a>
+                                {{/if}}
+                                <a class="dropdown-item" href="/tagList">Listar</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
