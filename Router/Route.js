@@ -34,45 +34,46 @@ const upload = multer({ storage: storage });
 
 
 //Home
-route.get("/home", function (req, res) { 
-    if (req.session.login) { res.render('home')}
+route.get("/Home", function (req, res) { 
+    if (req.session.login) { res.render('Home')}
     else res.redirect('/');
 });
 
 //Usuario
-route.get('/',ControllerUsuario.getLogin)
+route.get('/', ControllerUsuario.getLogin);
 route.post("/Login", ControllerUsuario.postLogin);
 route.get("/Logout", ControllerUsuario.getLogout);
 route.get("/CriarUsuario", ControllerUsuario.getCreate);
 route.post("/CriarUsuario", ControllerUsuario.postCreate);
-route.get("/LerUsu", ControllerUsuario.getList);
-route.get("/UsuarioUpdate/:id", ControllerUsuario.getUpdate);
-route.post("/UsuarioUpdate", ControllerUsuario.postUpdate);
-route.get("/UsuarioDelete/:id", ControllerUsuario.getDelete);
+route.get("/ListarUsuario", ControllerUsuario.getList);
+route.get("/AtualizarUsuario/:id", ControllerUsuario.getUpdate);
+route.post("/AtualizarUsuario", ControllerUsuario.postUpdate);
+route.get("/DeletarUsuario/:id", ControllerUsuario.getDelete);
 
 //Conhecimento
-route.get("/ConhecimentoCreate", ControllerConhecimento.getCreate);
-route.post("/ConhecimentoCreate", ControllerConhecimento.postCreate);
-route.get("/ConhecimentoList", ControllerConhecimento.getList);
-route.get("/ConhecimentoUpdate/:id", ControllerConhecimento.getUpdate);
-route.post("/ConhecimentoUpdate", ControllerConhecimento.postUpdate);
-route.get("/ConhecimentoDelete/:id", ControllerConhecimento.getDelete);
+route.get("/CriarConhecimento", ControllerConhecimento.getCreate);
+route.post("/CriarConhecimento", ControllerConhecimento.postCreate);
+route.get("/ListarConhecimento", ControllerConhecimento.getList);
+route.get("/AtualizarConhecimento/:id", ControllerConhecimento.getUpdate);
+route.post("/AtualizarConhecimento", ControllerConhecimento.postUpdate);
+route.get("/DeletarConhecimento/:id", ControllerConhecimento.getDelete);
 
 //Projeto
-route.get("/ProjetoCreate", ControllerProjeto.getCreate);
-route.post("/ProjetoCreate", ControllerProjeto.postCreate);
-route.get("/ProjetoList", ControllerProjeto.getList);
-route.get("/ProjetoUpdate/:id", ControllerProjeto.getUpdate);
-route.post("/ProjetoUpdate", ControllerProjeto.postUpdate);
-route.get("/ProjetoDelete/:id", ControllerProjeto.getDelete);
+route.get("/CriarProjeto", ControllerProjeto.getCreate);
+route.post("/CriarProjeto", ControllerProjeto.postCreate);
+route.get("/ListarProjeto", ControllerProjeto.getList);
+route.get("/AtualizarProjeto/:id", ControllerProjeto.getUpdate);
+route.post("/AtualizarProjeto", ControllerProjeto.postUpdate);
+route.get("/DeletarProjeto/:id", ControllerProjeto.getDelete);
 
 //Tag
-route.get("/TagCreate", ControllerTag.getCreate);
-route.post("/TagCreate", ControllerTag.postCreate);
-route.get("/TagList", ControllerTag.getList);
-route.get("/TagUpdate/:id", ControllerTag.getUpdate);
-route.post("/TagUpdate", ControllerTag.postUpdate);
-route.get("/TagDelete/:id", ControllerTag.getDelete);
+route.get("/CriarTag", ControllerTag.getCreate);
+route.post("/CriarTag", ControllerTag.postCreate);
+route.get("/ListarTag", ControllerTag.getList);
+route.get("/AtualizarTag/:id", ControllerTag.getUpdate);
+route.post("/AtualizarTag", ControllerTag.postUpdate);
+route.get("/DeletarTag/:id", ControllerTag.getDelete);
+
 
 // Export router
 module.exports = route;
