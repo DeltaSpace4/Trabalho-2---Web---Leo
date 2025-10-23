@@ -6,6 +6,7 @@ const ControllerProjeto = require('../Controllers/ControllerProjeto');
 const ControllerTag = require('../Controllers/ControllerTag');
 const ControllerUsuario = require('../Controllers/ControllerUsuario');
 
+
 const multer = require('multer');
 const route = express.Router();
 
@@ -37,7 +38,7 @@ route.get("/home", function (req, res) {
     else res.redirect('/');
 });
 
-
+//Usuario
 route.get('/',ControllerUsuario.getLogin)
 route.post("/login", ControllerUsuario.postLogin);
 route.get("/logout", ControllerUsuario.getLogout);
@@ -48,6 +49,7 @@ route.get("/usuarioUpdate/:id", ControllerUsuario.getUpdate);
 route.post("/usuarioUpdate", ControllerUsuario.postUpdate);
 route.get("/usuarioDelete/:id", ControllerUsuario.getDelete);
 
+//Conhecimento
 route.get("/ConhecimentoCreate", ControllerConhecimento.getCreate);
 route.post("/ConhecimentoCreate", ControllerConhecimento.postCreate);
 route.get("/ConhecimentoList", ControllerConhecimento.getList);
@@ -55,6 +57,7 @@ route.get("/ConhecimentoUpdate/:id", ControllerConhecimento.getUpdate);
 route.post("/ConhecimentoUpdate", ControllerConhecimento.postUpdate);
 route.get("/ConhecimentoDelete/:id", ControllerConhecimento.getDelete);
 
+//Projeto
 route.get("/ProjetoCreate", ControllerProjeto.getCreate);
 route.post("/ProjetoCreate", ControllerProjeto.postCreate);
 route.get("/ProjetoList", ControllerProjeto.getList);
@@ -62,6 +65,7 @@ route.get("/ProjetoUpdate/:id", ControllerProjeto.getUpdate);
 route.post("/ProjetoUpdate", ControllerProjeto.postUpdate);
 route.get("/ProjetoDelete/:id", ControllerProjeto.getDelete);
 
+//Tag
 route.get("/TagCreate", ControllerTag.getCreate);
 route.post("/TagCreate", ControllerTag.postCreate);
 route.get("/TagList", ControllerTag.getList);
@@ -69,16 +73,10 @@ route.get("/TagUpdate/:id", ControllerTag.getUpdate);
 route.post("/TagUpdate", ControllerTag.postUpdate);
 route.get("/TagDelete/:id", ControllerTag.getDelete);
 
-//Controller Comentario
-route.get("/comentarioCreate", controllerComentario.getCreate);
-route.post("/comentarioCreate", controllerComentario.postCreate);
-route.get("/comentarioList", controllerComentario.getList);
-
-
 // Export router
 module.exports = route;
 
 //Controller Comentario
-route.get("/comentarioCreate", controllerComentario.getCreate);
-route.post("/comentarioCreate", controllerComentario.postCreate);
-route.get("/comentarioList", controllerComentario.getList);
+/*route.get("/comentarioCreate", ControllerComentario.getCreate);
+route.post("/comentarioCreate", ControllerComentario.postCreate);
+route.get("/comentarioList", ControllerComentario.getList);*/

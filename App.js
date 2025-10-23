@@ -6,17 +6,10 @@ var session = require('express-session');
 const middlewares = require('./Middleware/Middleware');
 const app = express();
 
-/* Setup do Express 
-const path = require('path');
-app.use(express.static(path.join(__dirname, 'public'))); //arquivos acessáveis pelo navegador
-app.use(session({secret:'segredo', cookie:{maxAge: 60000}}));
-//app.use(cookieParser());
-*/
-
 /* Setup do Express */
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public'))); // arquivos acessáveis pelo navegador
-app.use(session({secret:'segredo', cookie:{maxAge: 60000}}));
+app.use(session({secret:'segredo', cookie:{maxAge: 60000},resave: true,saveUninitialized: true}));
 //app.use(cookieParser());
 
 app.engine('handlebars', handlebars.engine({defaultLayout: 'main'}));
