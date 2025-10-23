@@ -35,8 +35,17 @@ const upload = multer({ storage: storage });
 
 //Home
 route.get("/Home", function (req, res) { 
-    if (req.session.login) { res.render('Home')}
-    else res.redirect('/');
+    console.log('Home route - Session:', req.session);
+    if (req.session.email) { 
+        res.render('Home', {
+            layout: 'main',
+            email: req.session.email,
+            nome: req.session.nome,
+            admin: res.locals.admin
+        });
+    } else {
+        res.redirect('/');
+    }
 });
 
 //Usuario

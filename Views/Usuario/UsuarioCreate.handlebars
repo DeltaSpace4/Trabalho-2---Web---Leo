@@ -1,0 +1,31 @@
+<h2>Criar Nova Conta</h2>
+
+{{#if error}}
+<div class="alert alert-danger" role="alert">
+    {{error}}
+</div>
+{{/if}}
+
+<form action="/CriarUsuario" method="post">
+    <div class="form-group">
+        <label for="inputNome">Nome</label>
+        <input type="text" class="form-control" id="inputNome" name="nome" required>
+    </div>
+    <div class="form-group">
+        <label for="inputEmail">Email</label>
+        <input type="email" class="form-control" id="inputEmail" name="email" required>
+    </div>
+    <div class="form-group">
+        <label for="inputSenha">Senha</label>
+        <input type="password" class="form-control" id="inputSenha" name="senha" required>
+    </div>
+    <div class="form-group">
+        <label for="inputTipo">Tipo</label>
+        <select class="form-control" id="inputTipo" name="tipo">
+            <option value="aluno">Aluno</option>
+            <option value="admin">Administrador</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Criar Conta</button>
+    <a href="/" class="btn btn-secondary">Voltar</a>
+</form>

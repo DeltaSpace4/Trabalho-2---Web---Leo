@@ -4,15 +4,28 @@ module.exports = {
         next();
     },
     sessionControl(req, res, next) {
-        if (req.session.login != undefined) {
-            res.locals.login = req.session.login;
-            if (req.session.tipo == 2) { // Modo ADM
-                res.locals.admin = true
+        console.log('Session middleware - URL:', req.url, 'Method:', req.method);
+        console.log('Session data:', req.session);
+
+        // Public routes that don't need authentication
+        const publicRoutes = ['/', '/Login', '/CriarUsuario'];
+        if (publicRoutes.includes(req.url) || req.url.startsWith('/css/') || req.url.startsWith('/images/')) {
+            return next();
+        }
+
+        // Check if user is logged in
+        if (req.session.email) {
+            // Set locals for use in templates
+            res.locals.email = req.session.email;
+            res.locals.nome = req.session.nome;
+            if (req.session.tipo === 'admin') {
+                res.locals.admin = true;
             }
-            next();
-        } 
-        else if ((req.url == '/') && (req.method == 'GET')) next();
-        else if ((req.url == '/login') && (req.method == 'POST')) next();
-        else res.redirect('/');
+            return next();
+        }
+
+        // Not logged in and trying to access protected route
+        console.log('Unauthorized access attempt, redirecting to login');
+        res.redirect('/');
     }
 };

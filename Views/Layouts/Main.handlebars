@@ -11,8 +11,8 @@
 
     <body>
         <div class="text-center"> 
-            <img width="20%" src="../images/logo.jpg" alt="Logo do Sistema"> <br>
-            <label>Usuário Logado: {{login}}</label>
+            <img width="20%" src="/images/logo.jpg" alt="Logo do Sistema"> <br>
+            <label>Usuário Logado: {{email}}</label>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,7 +44,7 @@
                                 Projetos
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownProjetos">
-                                {{#if (or admin aluno)}}
+                                {{#if usuario}}
                                 <a class="dropdown-item" href="/ProjetoCreate">Criar</a>
                                 <a class="dropdown-item" href="/ProjetoUpdate">Editar</a>
                                 <a class="dropdown-item" href="/ProjetoDelete">Deletar</a>
