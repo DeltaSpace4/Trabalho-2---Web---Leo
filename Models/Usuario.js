@@ -10,10 +10,6 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.TEXT,
         allowNull: false
     },
-    login: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
     senha: {
         type: Sequelize.STRING,
         allowNull: false
@@ -24,7 +20,6 @@ module.exports = (sequelize, Sequelize) => {
     },
     tipo: { 
         type: Sequelize.ENUM('aluno','admin'), 
-        allowNull: false, 
         defaultValue: 'aluno' 
     },
     ativo: { 

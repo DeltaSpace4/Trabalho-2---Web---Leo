@@ -11,15 +11,17 @@ db.Projeto = require('../Models/Projeto.js')(sequelize, Sequelize);
 db.Conhecimento = require('../Models/Conhecimento.js')(sequelize, Sequelize);
 db.Tag = require('../Models/Tag.js')(sequelize, Sequelize);
 db.ProjetoTag = require('../Models/ProjetoTag.js')(sequelize, Sequelize);
+db.UsuarioProjeto = require('../Models/UsuarioProjeto.js')(sequelize, Sequelize);
+db.UsuarioConhecimento = require('../Models/UsuarioConhecimento.js')(sequelize, Sequelize);
 
 // Relacionamentos entre as tabelas -- Atualizar
 
 db.Projeto.belongsToMany(db.Tag, { through: db.ProjetoTag });
 db.Tag.belongsToMany(db.Projeto, { through: db.ProjetoTag });
-db.Projeto.belongsToMany(db.Usuario, { through: 'UsuarioProjetos' });
-db.Usuario.belongsToMany(db.Projeto, { through: 'UsuarioProjetos' });
-db.Conhecimento.belongsToMany(db.Usuario, { through: 'UsuarioConhecimento' });
-db.Usuario.belongsToMany(db.Conhecimento, { through: 'UsuarioConhecimento' });
+db.Projeto.belongsToMany(db.Usuario, { through: db.UsuarioProjeto });
+db.Usuario.belongsToMany(db.Projeto, { through: db.UsuarioProjeto });
+db.Conhecimento.belongsToMany(db.Usuario, { through: db.UsuarioConhecimento });
+db.Usuario.belongsToMany(db.Conhecimento, { through: db.UsuarioConhecimento });
 
 module.exports = db;
 
