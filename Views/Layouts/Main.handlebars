@@ -10,8 +10,8 @@
     </head>
 
     <body>
-        <center> 
-            <image width="20%" src="../images/logo.jpg"></image> <br>
+        <div class="text-center"> 
+            <img width="20%" src="../images/logo.jpg" alt="Logo do Sistema"> <br>
             <label>Usuário Logado: {{login}}</label>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -22,82 +22,74 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="/home">Home <span class="sr-only"></span></a>
+                            <a class="nav-link" href="/Home">Home <span class="sr-only"></span></a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUsuarios" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Usuários
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownUsuarios">
                                 {{#if admin}}
-                                <a class="dropdown-item" href="/usuarioCreate">Criar</a>
-                                {{#if admin}}
-                                <a class="dropdown-item" href="/usuarioUpdate">Editar</a>
-                                {{#if admin}}
-                                <a class="dropdown-item" href="/usuarioDelete">Deletar</a>
+                                <a class="dropdown-item" href="/CriarUsuario">Criar</a>
+                                <a class="dropdown-item" href="/LerUsuario">Listar</a>
+                                <a class="dropdown-item" href="/AtualizarUsuario">Editar</a>
+                                <a class="dropdown-item" href="/DeletarUsuario">Deletar</a>
                                 {{/if}}
-                                <a class="dropdown-item" href="/usuarioList">Listar</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownProjetos" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Projetos
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownProjetos">
                                 {{#if admin}}
-                                <a class="dropdown-item" href="/projetoCreate">Criar</a>
-                                {{#if admin}}
-                                <a class="dropdown-item" href="/projetoUpdate">Editar</a>
-                                {{#if admin}}
-                                <a class="dropdown-item" href="/projetoDelete">Deletar</a>
+                                <a class="dropdown-item" href="/ProjetoCreate">Criar</a>
+                                <a class="dropdown-item" href="/ProjetoList">Listar</a>
+                                <a class="dropdown-item" href="/ProjetoUpdate">Editar</a>
+                                <a class="dropdown-item" href="/ProjetoDelete">Deletar</a>
                                 {{/if}}
-                                <a class="dropdown-item" href="/projetoList">Listar</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownConhecimentos" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Conhecimentos
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownConhecimentos">
                                 {{#if admin}}
-                                <a class="dropdown-item" href="/conhecimentoCreate">Criar</a>
-                                {{#if admin}}
-                                <a class="dropdown-item" href="/conhecimentoUpdate">Editar</a>
-                                {{#if admin}}
-                                <a class="dropdown-item" href="/conhecimentoDelete">Deletar</a>
+                                <a class="dropdown-item" href="/ConhecimentoCreate">Criar</a>
+                                <a class="dropdown-item" href="/ConhecimentoList">Listar</a>
+                                <a class="dropdown-item" href="/ConhecimentoUpdate">Editar</a>
+                                <a class="dropdown-item" href="/ConhecimentoDelete">Deletar</a>
                                 {{/if}}
-                                <a class="dropdown-item" href="/conhecimentoList">Listar</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownTags" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Tags
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownTags">
                                 {{#if admin}}
-                                <a class="dropdown-item" href="/tagCreate">Criar</a>
-                                {{#if admin}}
-                                <a class="dropdown-item" href="/tagUpdate">Editar</a>
-                                {{#if admin}}
-                                <a class="dropdown-item" href="/tagDelete">Deletar</a>
+                                <a class="dropdown-item" href="/TagCreate">Criar</a>
+                                <a class="dropdown-item" href="/TagList">Listar</a>
+                                <a class="dropdown-item" href="/TagUpdate">Editar</a>
+                                <a class="dropdown-item" href="/TagDelete">Deletar</a>
                                 {{/if}}
-                                <a class="dropdown-item" href="/tagList">Listar</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownComentarios" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Comentários
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownComentarios">
                                 {{#if admin}}
-                                <a class="dropdown-item" href="/comentarioCreate">Criar</a>
+                                <a class="dropdown-item" href="/ComentarioCreate">Criar</a>
                                 {{/if}}
-                                <a class="dropdown-item" href="/comentarioList">Listar</a>
+                                <a class="dropdown-item" href="/ComentarioList">Listar</a>
                             </div>
                         </li>
                         <li class="nav-item">
@@ -109,7 +101,6 @@
 
             {{{body}}}
             
-        </center>
+        </div>
     </body>
-
 </html>
