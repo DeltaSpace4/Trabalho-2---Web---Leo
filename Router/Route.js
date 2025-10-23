@@ -40,14 +40,14 @@ route.get("/home", function (req, res) {
 
 //Usuario
 route.get('/',ControllerUsuario.getLogin)
-route.post("/login", ControllerUsuario.postLogin);
-route.get("/logout", ControllerUsuario.getLogout);
-route.get("/usuarioCreate", ControllerUsuario.getCreate);
-route.post("/usuarioCreate", ControllerUsuario.postCreate);
-route.get("/usuarioList", ControllerUsuario.getList);
-route.get("/usuarioUpdate/:id", ControllerUsuario.getUpdate);
-route.post("/usuarioUpdate", ControllerUsuario.postUpdate);
-route.get("/usuarioDelete/:id", ControllerUsuario.getDelete);
+route.post("/Login", ControllerUsuario.postLogin);
+route.get("/Logout", ControllerUsuario.getLogout);
+route.get("/UsuarioCreate", ControllerUsuario.getCreate);
+route.post("/UsuarioCreate", ControllerUsuario.postCreate);
+route.get("/UsuarioList", ControllerUsuario.getList);
+route.get("/UsuarioUpdate/:id", ControllerUsuario.getUpdate);
+route.post("/UsuarioUpdate", ControllerUsuario.postUpdate);
+route.get("/UsuarioDelete/:id", ControllerUsuario.getDelete);
 
 //Conhecimento
 route.get("/ConhecimentoCreate", ControllerConhecimento.getCreate);
