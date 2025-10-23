@@ -17,10 +17,10 @@ module.exports = {
 
     async postLogin(req, res) {
         try {
-            const user = await db.Usuario.findOne({ where: { login: req.body.login } });
+            const user = await db.Usuario.findOne({ where: { email: req.body.email } });
             if (user && await bcrypt.compare(req.body.senha, user.senha)) {
-                req.session.login = req.body.login;
-                res.locals.login = req.body.login;
+                req.session.email = req.body.email;
+                res.locals.email = req.body.email;
                 if (user.dataValues.tipo == 2) {
                     req.session.tipo = user.dataValues.tipo;
                     res.locals.admin = true;
