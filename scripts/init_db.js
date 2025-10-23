@@ -14,7 +14,7 @@ async function initDB() {
       nome: 'Test User',
       senha: 'test123',
       email: 'test@example.com',
-      tipo: 'aluno'
+      tipo: 'admin'
     });
     console.log('\nTest user created:', testUser.toJSON());
 

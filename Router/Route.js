@@ -11,10 +11,10 @@ const multer = require('multer');
 const route = express.Router();
 
 // Rodar 1x 
-db.sequelize.sync({ force: true })
-    .then(() => console.log('Tabelas criadas!'))
-    .catch(err => console.error(err));
-
+/*db.sequelize.sync({force: true}).then(() => {
+    console.log('{ force: true }');
+});
+*/
 db.Usuario.create({nome:'bob', senha:'1234', email:'test'});
 
 /* Upload de imagem
