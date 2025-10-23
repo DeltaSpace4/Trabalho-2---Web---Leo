@@ -42,9 +42,9 @@ route.get("/home", function (req, res) {
 route.get('/',ControllerUsuario.getLogin)
 route.post("/Login", ControllerUsuario.postLogin);
 route.get("/Logout", ControllerUsuario.getLogout);
-route.get("/UsuarioCreate", ControllerUsuario.getCreate);
-route.post("/UsuarioCreate", ControllerUsuario.postCreate);
-route.get("/UsuarioList", ControllerUsuario.getList);
+route.get("/CriarUsuario", ControllerUsuario.getCreate);
+route.post("/CriarUsuario", ControllerUsuario.postCreate);
+route.get("/LerUsu", ControllerUsuario.getList);
 route.get("/UsuarioUpdate/:id", ControllerUsuario.getUpdate);
 route.post("/UsuarioUpdate", ControllerUsuario.postUpdate);
 route.get("/UsuarioDelete/:id", ControllerUsuario.getDelete);
