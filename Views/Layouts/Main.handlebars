@@ -32,10 +32,10 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownUsuarios">
                                 {{#if admin}}
                                 <a class="dropdown-item" href="/CriarUsuario">Criar</a>
-                                <a class="dropdown-item" href="/LerUsuario">Listar</a>
                                 <a class="dropdown-item" href="/AtualizarUsuario">Editar</a>
                                 <a class="dropdown-item" href="/DeletarUsuario">Deletar</a>
                                 {{/if}}
+                                <a class="dropdown-item" href="/LerUsuario">Listar</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -44,12 +44,12 @@
                                 Projetos
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownProjetos">
-                                {{#if admin}}
+                                {{#if (or admin aluno)}}
                                 <a class="dropdown-item" href="/ProjetoCreate">Criar</a>
-                                <a class="dropdown-item" href="/ProjetoList">Listar</a>
                                 <a class="dropdown-item" href="/ProjetoUpdate">Editar</a>
                                 <a class="dropdown-item" href="/ProjetoDelete">Deletar</a>
                                 {{/if}}
+                                <a class="dropdown-item" href="/ProjetoList">Listar</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -60,10 +60,10 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownConhecimentos">
                                 {{#if admin}}
                                 <a class="dropdown-item" href="/ConhecimentoCreate">Criar</a>
-                                <a class="dropdown-item" href="/ConhecimentoList">Listar</a>
                                 <a class="dropdown-item" href="/ConhecimentoUpdate">Editar</a>
                                 <a class="dropdown-item" href="/ConhecimentoDelete">Deletar</a>
                                 {{/if}}
+                                <a class="dropdown-item" href="/ConhecimentoList">Listar</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -74,10 +74,10 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownTags">
                                 {{#if admin}}
                                 <a class="dropdown-item" href="/TagCreate">Criar</a>
-                                <a class="dropdown-item" href="/TagList">Listar</a>
                                 <a class="dropdown-item" href="/TagUpdate">Editar</a>
                                 <a class="dropdown-item" href="/TagDelete">Deletar</a>
                                 {{/if}}
+                                <a class="dropdown-item" href="/TagList">Listar</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
