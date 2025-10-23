@@ -18,8 +18,8 @@ db.Projeto.belongsToMany(db.Tag, { through: db.ProjetoTag });
 db.Tag.belongsToMany(db.Projeto, { through: db.ProjetoTag });
 db.Projeto.belongsToMany(db.Usuario, { through: 'UsuarioProjetos' });
 db.Usuario.belongsToMany(db.Projeto, { through: 'UsuarioProjetos' });
-db.Conhecimento.belongsToMany(db.Usuario, { through: 'UsuarioConhecimentos' });
-db.Usuario.belongsToMany(db.Conhecimento, { through: 'UsuarioConhecimentos' });
+db.Conhecimento.belongsToMany(db.Usuario, { through: 'UsuarioConhecimento' });
+db.Usuario.belongsToMany(db.Conhecimento, { through: 'UsuarioConhecimento' });
 
 module.exports = db;
 

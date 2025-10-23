@@ -9,10 +9,6 @@ module.exports = (sequelize, Sequelize) => {
     nome: {
         type: Sequelize.STRING,
         allowNull: false
-    },
-    Dominio: {
-        type: Sequelize.INTEGER,
-        allowNull: false
     }
   });
   return Conhecimento;
