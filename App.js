@@ -12,7 +12,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // arquivos acessáveis
 app.use(session({secret:'segredo', cookie:{maxAge: 60000},resave: true,saveUninitialized: true}));
 //app.use(cookieParser());
 
-app.engine('handlebars', handlebars.engine({defaultLayout: 'main'}));
+app.engine('handlebars', handlebars.engine({defaultLayout: 'NoMenu'}));
 app.set('view engine', 'handlebars');
 
 app.use(express.json());

@@ -11,7 +11,7 @@ async function initDB() {
 
     // Create a test user to verify
     const testUser = await db.Usuario.create({
-      nome: 'Test User',
+      nome: 'Test',
       senha: 'test123',
       email: 'test@example.com',
       tipo: 'admin'

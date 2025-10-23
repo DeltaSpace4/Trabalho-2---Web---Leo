@@ -11,7 +11,7 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: false
     },
     senha: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false
     },
     email: {
