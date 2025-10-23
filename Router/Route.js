@@ -15,7 +15,7 @@ const route = express.Router();
     console.log('{ force: true }');
 });
 */
-//db.Usuario.create({nome:'bob', senha:'1234', email:'test',tipo:'admin'});
+db.Usuario.create({nome:'bob', senha:'1234', email:'test@gmail.com',tipo:'admin'});
 
 /* Upload de imagem
 module.exports = route;

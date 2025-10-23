@@ -1,1 +1,19 @@
-<body></body>
+<div class="container">
+    <h2>Bem-vindo!</h2>
+    {{#if admin}}
+        <p>Você está logado como administrador.</p>
+    {{else}}
+        <p>Você está logado como usuário.</p>
+    {{/if}}
+    
+    <div class="row mt-4">
+        <div class="col">
+            <h3>Menu</h3>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="/ListarUsuario">Listar Usuários</a></li>
+                <li class="list-group-item"><a href="/ListarProjeto">Listar Projetos</a></li>
+                <li class="list-group-item"><a href="/ListarConhecimento">Listar Conhecimentos</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
