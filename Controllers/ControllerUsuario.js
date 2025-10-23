@@ -7,7 +7,7 @@ module.exports = {
 
     // Login
     async getLogin(req, res) {
-        res.render('Usuario/login', { layout: 'NoMenu.handlebars' });
+        res.render('Usuario/Login', { layout: 'NoMenu.handlebars' });
     },
     async getLogout(req, res) {
         //res.cookie("userData", req.cookies.userData, { maxAge: 0, httpOnly: true });
