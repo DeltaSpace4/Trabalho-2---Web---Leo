@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
     const UsuarioConhecimento = sequelize.define('usuario_conhecimento', {    
-        Dominio: {
+        dominio: {
             type: Sequelize.INTEGER,
             allowNull: false
         }
