@@ -18,7 +18,7 @@ async function initDB() {
     const Usuario = await db.Usuario.create({
       nome: 'Test',
       senha: hashedPassword,
-      email: 'test@example.com',
+      email: 'test@email.com',
       tipo: 'admin'
     });
     console.log('\nTest user created:', Usuario.toJSON());
