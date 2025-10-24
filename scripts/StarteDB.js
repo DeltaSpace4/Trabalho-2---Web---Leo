@@ -15,13 +15,30 @@ async function initDB() {
     const hashedPassword = await bcrypt.hash('123', saltRounds);
 
     // Create a test user to verify
-    const testUser = await db.Usuario.create({
+    const Usuario = await db.Usuario.create({
       nome: 'Test',
       senha: hashedPassword,
       email: 'test@example.com',
       tipo: 'admin'
     });
-    console.log('\nTest user created:', testUser.toJSON());
+    console.log('\nTest user created:', Usuario.toJSON());
+
+    const Conhecimento = await db.Conhecimento.create({
+      nome: 'Conhecimento',
+    });
+    console.log('\nTest conhecimento created:', Conhecimento.toJSON());
+
+    const Tag = await db.Tag.create({
+      nome: 'Tag',
+    });
+    console.log('\nTest tag created:', Tag.toJSON());
+
+    const Projeto = await db.Projeto.create({
+      nome: 'Projeto',
+      resumo:'Resumo',
+      link:'Link'
+    });
+    console.log('\nTest projeto created:', Projeto.toJSON());
 
   } catch (err) {
     console.error('Error:', err);

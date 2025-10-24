@@ -4,7 +4,7 @@ const path = require('path');
 module.exports = {
     // Create
     async getCreate(req, res) {
-        res.render('tag/tagCreate');
+        res.render('tag/criarTag');
     },
     async postCreate(req, res) {
         db.Tag.create(req.body).then(() => {

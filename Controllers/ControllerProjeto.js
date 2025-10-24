@@ -5,7 +5,7 @@ module.exports = {
     // Create
     async getCreate(req, res) {
         var tag = await db.Tag.findAll()
-        res.render('projeto/projetoCreate', {
+        res.render('projeto/criarProjeto', {
             tag: tag.map(tag => tag.toJSON())
         });
     },
