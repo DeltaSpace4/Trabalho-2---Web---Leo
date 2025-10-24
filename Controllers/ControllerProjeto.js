@@ -35,9 +35,40 @@ module.exports = {
 
     // List
     async getList(req, res) {
-        db.Projeto.findAll().then(projeto => {
-            res.render('projeto/listarProjeto', { projeto: projeto.map(pr => pr.toJSON()) });
-        }).catch((err) => { console.log(err); });
+        try {
+            // Buscar projetos com seus usuários vinculados
+            const projetos = await db.Projeto.findAll();
+
+            // Buscar as vinculações do usuário atual
+            const userLinks = await db.UsuarioProjeto.findAll({
+                where: {
+                    usuarioId: req.session.userId
+                }
+            });
+
+            // Criar um Set dos IDs de projetos que o usuário tem acesso
+            const userProjectIds = new Set(userLinks.map(link => link.projetoId));
+
+            // Processar cada projeto para adicionar flag de permissão
+            const projetosProcessados = projetos.map(projeto => {
+                const projetoJSON = projeto.toJSON();
+                // Usuário pode editar se for admin ou se estiver vinculado ao projeto
+                projetoJSON.canEdit = req.session.tipo === 'admin' || userProjectIds.has(projeto.id);
+                // Se o usuário está vinculado ao projeto, tem as mesmas permissões que um admin
+                if (userProjectIds.has(projeto.id)) {
+                    projetoJSON.canEdit = true;
+                }
+                return projetoJSON;
+            });
+
+            res.render('projeto/listarProjeto', { 
+                projeto: projetosProcessados,
+                admin: req.session.tipo === 'admin'
+            });
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({ error: err.message });
+        }
     },
 
     //Update

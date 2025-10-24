@@ -1,3 +1,5 @@
+const db = require('../Config/Db');
+
 module.exports = {
     logRegister(req, res, next) {
         console.log(req.url + req.method + new Date())
@@ -47,29 +49,32 @@ module.exports = {
                 return res.redirect('/home');
             }
 
-            // find the user and their linked projects
-            const user = await db.Usuario.findOne({
-                where: { email: req.session.email },
-                include: [{
-                    model: db.Projeto,
-                    where: { id: projetoId },
-                    required: false
-                }]
+            // Check if the user has access via UsuarioProjeto
+            const usuarioProjeto = await db.UsuarioProjeto.findOne({
+                where: {
+                    usuarioId: req.session.userId,
+                    projetoId: projetoId
+                }
             });
 
-            if (!user) {
-                console.log('User not found:', req.session.email);
-                return res.redirect('/home');
-            }
-
-            // check if user is linked to this project
-            const hasAccess = user.projetos && user.projetos.some(p => p.id === parseInt(projetoId));
-            if (!hasAccess) {
+            if (!usuarioProjeto) {
                 console.log('User not linked to projeto:', projetoId);
                 return res.redirect('/home');
             }
 
-            // user is linked to project, allow access
+            // Se o usuário está vinculado ao projeto, dar permissões de admin temporariamente
+            res.locals.admin = true;
+            // Guarda o estado original do tipo de usuário
+            const originalTipo = req.session.tipo;
+            req.session.tipo = 'admin';
+
+            // Após a requisição, restaurar o tipo original
+            res.on('finish', () => {
+                req.session.tipo = originalTipo;
+                res.locals.admin = (originalTipo === 'admin');
+            });
+
+            // user is linked to project through UsuarioProjeto, allow access with admin privileges
             next();
         } catch (err) {
             console.error('Error checking project access:', err);

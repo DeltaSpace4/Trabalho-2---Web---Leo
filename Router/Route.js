@@ -88,10 +88,10 @@ route.get("/deletarTag/:id", ControllerTag.getDelete);
 
 //ProjetoTag
 // allow both GET (link) and POST (form) variants; controller accepts params or body
-route.get("/criarProjetoTag/:projetoId/:tagId", ControllerProgetoTag.postCreate);
-route.post("/criarProjetoTag", ControllerProgetoTag.postCreate);
-route.get("/removerProjetoTag/:projetoId/:tagId", ControllerProgetoTag.remove);
-route.post("/atualizarProjetoTags", ControllerProgetoTag.updateMany);
+route.get("/criarProjetoTag/:projetoId/:tagId", middlewares.checkUserProjectAccess, ControllerProgetoTag.postCreate);
+route.post("/criarProjetoTag", middlewares.checkUserProjectAccess, ControllerProgetoTag.postCreate);
+route.get("/removerProjetoTag/:projetoId/:tagId", middlewares.checkUserProjectAccess, ControllerProgetoTag.remove);
+route.post("/atualizarProjetoTags", middlewares.checkUserProjectAccess, ControllerProgetoTag.updateMany);
 
 // Export router
 module.exports = route;

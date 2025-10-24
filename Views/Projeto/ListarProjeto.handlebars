@@ -5,10 +5,7 @@
             <th scope="col">Resumo</th>
             <th scope="col">Link</th>
             <th scope="col">Id</th>
-            {{#if admin}}
-            <th scope="col">Editar</th>
-            <th scope="col">Deletar</th>
-            {{/if}}
+            <th scope="col">Ações</th>
         </tr>
     </thead>
     <tbody>
@@ -18,10 +15,13 @@
             <td>{{resumo}}</td>
             <td>{{link}}</td>
             <td>{{id}}</td>
-            {{#if ../admin}}
-            <td><a href="atualizarProjeto/{{id}}">Editar</a></td>
-            <td><a href="deletarProjeto/{{id}}">Deletar</a></td>
-            {{/if}}
+            <td>
+                {{#if canEdit}}
+                <a href="atualizarProjeto/{{id}}" class="btn btn-sm btn-primary">Editar</a>
+                <a href="deletarProjeto/{{id}}" class="btn btn-sm btn-danger">Deletar</a>
+                {{else}}
+                <span class="text-muted">Sem permissão</span>
+                {{/if}}
         </tr>
         {{/each}}
     </tbody>

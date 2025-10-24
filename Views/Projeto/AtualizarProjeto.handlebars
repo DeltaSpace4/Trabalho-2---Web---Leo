@@ -17,19 +17,6 @@
     <button type="submit" class="btn btn-primary">Atualizar Projeto</button>
     <a href="/home" style="margin-left:10px;">Voltar</a>
 </form>
-{{else}}
-<div class="alert alert-info">
-    Você não tem permissão para editar este projeto. Entre em contato com o administrador para solicitar acesso.
-</div>
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">{{projeto.nome}}</h5>
-        <p class="card-text">{{projeto.resumo}}</p>
-        <a href="{{projeto.link}}" target="_blank" class="card-link">Link do Projeto</a>
-    </div>
-</div>
-{{/if}}
-
 <!-- Tags form: select multiple tags and submit to update associations -->
 <form action="/atualizarProjetoTags" method="post">
     <input type="hidden" name="projetoId" value="{{projeto.id}}">
@@ -53,7 +40,19 @@
         </tr>
         {{/each}}
     </tbody>
-</table>
+    </table>
     <br>
     <button type="submit" class="btn btn-primary">Salvar Tags</button>
 </form>
+{{else}}
+<div class="alert alert-info">
+    Você não tem permissão para editar este projeto. Entre em contato com o administrador para solicitar acesso.
+</div>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{projeto.nome}}</h5>
+        <p class="card-text">{{projeto.resumo}}</p>
+        <a href="{{projeto.link}}" target="_blank" class="card-link">Link do Projeto</a>
+    </div>
+</div>
+{{/if}}
