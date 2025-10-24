@@ -30,5 +30,50 @@ module.exports = {
         // Not logged in and trying to access protected route
         console.log('Unauthorized access attempt, redirecting to login');
         res.redirect('/');
+    },
+
+    // Check if user can edit a project (is admin or linked via UsuarioProjeto)
+    async checkUserProjectAccess(req, res, next) {
+        try {
+            // admins can edit all projects
+            if (req.session.tipo === 'admin') {
+                return next();
+            }
+
+            // get projetoId from params, body or query
+            const projetoId = req.params.id || req.body.id || req.query.projetoId;
+            if (!projetoId) {
+                console.log('No projeto id found in request');
+                return res.redirect('/home');
+            }
+
+            // find the user and their linked projects
+            const user = await db.Usuario.findOne({
+                where: { email: req.session.email },
+                include: [{
+                    model: db.Projeto,
+                    where: { id: projetoId },
+                    required: false
+                }]
+            });
+
+            if (!user) {
+                console.log('User not found:', req.session.email);
+                return res.redirect('/home');
+            }
+
+            // check if user is linked to this project
+            const hasAccess = user.projetos && user.projetos.some(p => p.id === parseInt(projetoId));
+            if (!hasAccess) {
+                console.log('User not linked to projeto:', projetoId);
+                return res.redirect('/home');
+            }
+
+            // user is linked to project, allow access
+            next();
+        } catch (err) {
+            console.error('Error checking project access:', err);
+            res.redirect('/home');
+        }
     }
 };

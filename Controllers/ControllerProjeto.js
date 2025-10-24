@@ -10,9 +10,27 @@ module.exports = {
         });
     },
     async postCreate(req, res) {
-        db.Projeto.create(req.body).then(() => {
+        try {
+            // Primeiro, criar o projeto
+            const projeto = await db.Projeto.create(req.body);
+            
+            // Encontrar o usuário atual
+            const usuario = await db.Usuario.findOne({
+                where: { email: req.session.email }
+            });
+
+            if (!usuario) {
+                throw new Error('Usuário não encontrado');
+            }
+
+            // Vincular o projeto ao usuário que o criou
+            await projeto.addUsuario(usuario);
+
             res.redirect('/home');
-        }).catch((err) => { console.log(err); });
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({ error: err.message });
+        }
     },
 
     // List
@@ -25,18 +43,46 @@ module.exports = {
     //Update
     async getUpdate(req, res) {
         try {
-            // load projeto and all tags so the update view can show available tags to add
-            const [projeto, tags] = await Promise.all([
-                db.Projeto.findByPk(req.params.id),
-                db.Tag.findAll()
-            ]);
+            // Load projeto including its Tags and Usuarios
+            const projeto = await db.Projeto.findByPk(req.params.id, {
+                include: [
+                    { model: db.Tag },
+                    { model: db.Usuario }
+                ]
+            });
+            const tags = await db.Tag.findAll();
+
+            if (!projeto) {
+                console.log('Projeto not found:', req.params.id);
+                return res.redirect('/listarProjeto');
+            }
+
+            const projetoData = projeto.dataValues;
+
+            // Collect linked tag ids and user ids
+            const linkedTagIds = projeto.Tags ? projeto.Tags.map(t => t.id) : [];
+            const linkedUserIds = projeto.Usuarios ? projeto.Usuarios.map(u => u.id) : [];
+
+            // Add linked flag to tags
+            const tagsWithFlag = tags.map(t => {
+                const json = t.toJSON();
+                json.linked = linkedTagIds.includes(json.id);
+                return json;
+            });
+
+            // Determine if user can edit based on admin status or project association
+            const canEdit = req.session.tipo === 'admin' || 
+                          (projeto.Usuarios && 
+                           projeto.Usuarios.some(u => u.email === req.session.email));
 
             return res.render('projeto/atualizarProjeto', {
-                projeto: projeto ? projeto.dataValues : {},
-                tag: tags ? tags.map(t => t.toJSON()) : []
+                projeto: projetoData,
+                tag: tagsWithFlag,
+                canEdit: canEdit
             });
         } catch (err) {
             console.log(err);
+            return res.redirect('/listarProjeto');
         }
     },
     async postUpdate(req, res) {

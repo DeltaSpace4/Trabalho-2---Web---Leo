@@ -1,6 +1,6 @@
 const db = require('../Config/Db');
 const path = require('path');
-const db_mongoose = require('./config/Db_mongoose');
+//const db_mongoose = require('./Config/Db_mongoose');
 
 async function LogarConhecimento(texto, req) {
     try {

@@ -1,21 +1,43 @@
+{{#if canEdit}}
 <form action="/atualizarProjeto" method="post">
     <input type="hidden" name="id" value={{projeto.id}}>
     <div class="form-group">
         <label for="inputNome">Novo Nome</label>
-        <input type="text" class="form-control" id="inputNome" name="nome">
+        <input type="text" class="form-control" id="inputNome" name="nome" value="{{projeto.nome}}">
     </div>
     <div class="form-group">
         <label for="inputResumo">Novo Resumo</label>
-        <input type="text" class="form-control" id="inputResumo" name="resumo">
+        <input type="text" class="form-control" id="inputResumo" name="resumo" value="{{projeto.resumo}}">
     </div>
     <div class="form-group">
         <label for="inputLink">Novo Link</label>
-        <input type="text" class="form-control" id="inputLink" name="link">
+        <input type="text" class="form-control" id="inputLink" name="link" value="{{projeto.link}}">
     </div>
-        <label for="inputLink">Adicionar Tags</label>
+    <br>
+    <button type="submit" class="btn btn-primary">Atualizar Projeto</button>
+    <a href="/home" style="margin-left:10px;">Voltar</a>
+</form>
+{{else}}
+<div class="alert alert-info">
+    Você não tem permissão para editar este projeto. Entre em contato com o administrador para solicitar acesso.
+</div>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{projeto.nome}}</h5>
+        <p class="card-text">{{projeto.resumo}}</p>
+        <a href="{{projeto.link}}" target="_blank" class="card-link">Link do Projeto</a>
+    </div>
+</div>
+{{/if}}
+
+<!-- Tags form: select multiple tags and submit to update associations -->
+<form action="/atualizarProjetoTags" method="post">
+    <input type="hidden" name="projetoId" value="{{projeto.id}}">
+    <label>Tags (marque as que devem ficar vinculadas)</label>
     <table class="table">
     <thead>
         <tr>
+            <th scope="col">Vincular</th>
             <th scope="col">Nome</th>
             <th scope="col">Id</th>
         </tr>
@@ -23,13 +45,15 @@
     <tbody>
         {{#each tag}}
         <tr>
+            <td>
+                <input type="checkbox" name="tagIds" value="{{id}}" {{#if linked}}checked{{/if}}>
+            </td>
             <th scope="row">{{nome}}</th>
             <td>{{id}}</td>
-            <td><a href="/criarProjetoTag/{{../projeto.id}}/{{id}}">Adicionar Tag</a></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
-    <br><br>
-    <button type="submit" class="btn btn-primary">Atualizar Projeto</button>
+    <br>
+    <button type="submit" class="btn btn-primary">Salvar Tags</button>
 </form>

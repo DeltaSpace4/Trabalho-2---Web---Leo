@@ -6,6 +6,7 @@ const ControllerProjeto = require('../Controllers/ControllerProjeto');
 const ControllerTag = require('../Controllers/ControllerTag');
 const ControllerUsuario = require('../Controllers/ControllerUsuario');
 const ControllerProgetoTag = require('../Controllers/ControllerProgetoTag');
+const middlewares = require('../Middleware/Middleware');
 
 
 const multer = require('multer');
@@ -73,9 +74,9 @@ route.get("/deletarConhecimento/:id", ControllerConhecimento.getDelete);
 route.get("/criarProjeto", ControllerProjeto.getCreate);
 route.post("/criarProjeto", ControllerProjeto.postCreate);
 route.get("/listarProjeto", ControllerProjeto.getList);
-route.get("/atualizarProjeto/:id", ControllerProjeto.getUpdate);
-route.post("/atualizarProjeto", ControllerProjeto.postUpdate);
-route.get("/deletarProjeto/:id", ControllerProjeto.getDelete);
+route.get("/atualizarProjeto/:id", middlewares.checkUserProjectAccess, ControllerProjeto.getUpdate);
+route.post("/atualizarProjeto", middlewares.checkUserProjectAccess, ControllerProjeto.postUpdate);
+route.get("/deletarProjeto/:id", middlewares.checkUserProjectAccess, ControllerProjeto.getDelete);
 
 //Tag
 route.get("/criarTag", ControllerTag.getCreate);
@@ -89,6 +90,8 @@ route.get("/deletarTag/:id", ControllerTag.getDelete);
 // allow both GET (link) and POST (form) variants; controller accepts params or body
 route.get("/criarProjetoTag/:projetoId/:tagId", ControllerProgetoTag.postCreate);
 route.post("/criarProjetoTag", ControllerProgetoTag.postCreate);
+route.get("/removerProjetoTag/:projetoId/:tagId", ControllerProgetoTag.remove);
+route.post("/atualizarProjetoTags", ControllerProgetoTag.updateMany);
 
 // Export router
 module.exports = route;
