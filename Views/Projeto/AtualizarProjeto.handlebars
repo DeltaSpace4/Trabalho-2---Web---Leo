@@ -44,6 +44,38 @@
     <br>
     <button type="submit" class="btn btn-primary">Salvar Tags</button>
 </form>
+
+<hr>
+
+<!-- Users form: select multiple users and submit to update associations -->
+<form action="/atualizarProjetoUsuarios" method="post">
+    <input type="hidden" name="projetoId" value="{{projeto.id}}">
+    <label>Usuários (marque os que devem ter acesso ao projeto)</label>
+    <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Vincular</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Email</th>
+            <th scope="col">Tipo</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each usuarios}}
+        <tr>
+            <td>
+                <input type="checkbox" name="usuarioIds" value="{{id}}" {{#if linked}}checked{{/if}}>
+            </td>
+            <th scope="row">{{nome}}</th>
+            <td>{{email}}</td>
+            <td>{{tipo}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+    </table>
+    <br>
+    <button type="submit" class="btn btn-primary">Salvar Usuários</button>
+</form>
 {{else}}
 <div class="alert alert-info">
     Você não tem permissão para editar este projeto. Entre em contato com o administrador para solicitar acesso.
