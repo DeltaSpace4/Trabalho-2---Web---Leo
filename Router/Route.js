@@ -5,6 +5,7 @@ const ControllerConhecimento = require('../Controllers/ControllerConhecimento');
 const ControllerProjeto = require('../Controllers/ControllerProjeto');
 const ControllerTag = require('../Controllers/ControllerTag');
 const ControllerUsuario = require('../Controllers/ControllerUsuario');
+const ControllerProgetoTag = require('../Controllers/ControllerProgetoTag');
 
 
 const multer = require('multer');
@@ -84,6 +85,10 @@ route.get("/atualizarTag/:id", ControllerTag.getUpdate);
 route.post("/atualizarTag", ControllerTag.postUpdate);
 route.get("/deletarTag/:id", ControllerTag.getDelete);
 
+//ProjetoTag
+// allow both GET (link) and POST (form) variants; controller accepts params or body
+route.get("/criarProjetoTag/:projetoId/:tagId", ControllerProgetoTag.postCreate);
+route.post("/criarProjetoTag", ControllerProgetoTag.postCreate);
 
 // Export router
 module.exports = route;

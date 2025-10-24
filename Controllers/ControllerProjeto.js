@@ -24,9 +24,20 @@ module.exports = {
 
     //Update
     async getUpdate(req, res) {
-        await db.Projeto.findByPk(req.params.id).then(
-            projeto => res.render('projeto/atualizarProjeto', { projeto: projeto.dataValues })
-        ).catch(function (err) { console.log(err); });
+        try {
+            // load projeto and all tags so the update view can show available tags to add
+            const [projeto, tags] = await Promise.all([
+                db.Projeto.findByPk(req.params.id),
+                db.Tag.findAll()
+            ]);
+
+            return res.render('projeto/atualizarProjeto', {
+                projeto: projeto ? projeto.dataValues : {},
+                tag: tags ? tags.map(t => t.toJSON()) : []
+            });
+        } catch (err) {
+            console.log(err);
+        }
     },
     async postUpdate(req, res) {
         await db.Projeto.update(req.body, { where: { id: req.body.id } }).then(

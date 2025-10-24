@@ -12,6 +12,24 @@
         <label for="inputLink">Novo Link</label>
         <input type="text" class="form-control" id="inputLink" name="link">
     </div>
+        <label for="inputLink">Adicionar Tags</label>
+    <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Id</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each tag}}
+        <tr>
+            <th scope="row">{{nome}}</th>
+            <td>{{id}}</td>
+            <td><a href="/criarProjetoTag/{{../projeto.id}}/{{id}}">Adicionar Tag</a></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
     <br><br>
     <button type="submit" class="btn btn-primary">Atualizar Projeto</button>
 </form>
