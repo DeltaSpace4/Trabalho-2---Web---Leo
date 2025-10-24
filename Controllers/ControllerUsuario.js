@@ -58,6 +58,11 @@ module.exports = {
                 res.locals.admin = true;
             }
 
+            if (user.tipo === 'aluno') {
+                req.session.tipo = 'aluno';
+                res.locals.aluno = true;
+            }
+
             console.log('Login successful, session:', req.session);
             return res.redirect('/home');
         } catch (err) {
@@ -115,6 +120,11 @@ module.exports = {
             if (user.tipo === 'admin') {
                 req.session.tipo = 'admin';
                 res.locals.admin = true;
+            }
+
+            if (user.tipo === 'aluno') {
+                req.session.tipo = 'aluno';
+                res.locals.aluno = true;
             }
 
             return res.redirect('/home');

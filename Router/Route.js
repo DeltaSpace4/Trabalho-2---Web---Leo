@@ -41,7 +41,8 @@ route.get("/home", function (req, res) {
             layout: 'main',
             email: req.session.email,
             nome: req.session.nome,
-            admin: res.locals.admin
+            admin: res.locals.admin,
+            aluno: res.locals.aluno
         });
     } else {
         res.redirect('/');

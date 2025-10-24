@@ -21,6 +21,9 @@ module.exports = {
             if (req.session.tipo === 'admin') {
                 res.locals.admin = true;
             }
+            if (req.session.tipo === 'aluno') {
+                res.locals.aluno = true;
+            }
             return next();
         }
 

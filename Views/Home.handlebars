@@ -2,8 +2,10 @@
     <h2>Bem-vindo!</h2>
     {{#if admin}}
         <p>Você está logado como administrador.</p>
+    {{else if aluno}}
+        <p>Você está logado como aluno.</p>
     {{else}}
-        <p>Você está logado como usuário.</p>
+        <p>Você está logado como visitante.</p>
     {{/if}}
     
     <div class="row mt-4">

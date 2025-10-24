@@ -44,12 +44,19 @@
                                 Projetos
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownProjetos">
-                                {{#if usuario}}
+                                {{#if admin}}
                                 <a class="dropdown-item" href="/projetoCreate">Criar</a>
                                 <a class="dropdown-item" href="/projetoUpdate">Editar</a>
                                 <a class="dropdown-item" href="/projetoDelete">Deletar</a>
-                                {{/if}}
                                 <a class="dropdown-item" href="/projetoList">Listar</a>
+                                {{else if aluno}}
+                                <a class="dropdown-item" href="/projetoCreate">Criar</a>
+                                <a class="dropdown-item" href="/projetoUpdate">Editar</a>
+                                <a class="dropdown-item" href="/projetoDelete">Deletar</a>
+                                <a class="dropdown-item" href="/projetoList">Listar</a>
+                                {{else}}
+                                <a class="dropdown-item" href="/projetoList">Listar</a>
+                                {{/if}}
                             </div>
                         </li>
                         <li class="nav-item dropdown">
