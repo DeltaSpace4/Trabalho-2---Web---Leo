@@ -6,7 +6,7 @@ const ControllerProjeto = require('../Controllers/ControllerProjeto');
 const ControllerTag = require('../Controllers/ControllerTag');
 const ControllerUsuario = require('../Controllers/ControllerUsuario');
 const ControllerProgetoTag = require('../Controllers/ControllerProgetoTag');
-const ControllerProjetoUsuario = require('../Controllers/ControllerProjetoUsuario');
+const ControllerUsuarioProjeto = require('../Controllers/ControllerUsuarioProjeto');
 const middlewares = require('../Middleware/Middleware');
 
 
@@ -94,10 +94,8 @@ route.post("/criarProjetoTag", middlewares.checkUserProjectAccess, ControllerPro
 route.get("/removerProjetoTag/:projetoId/:tagId", middlewares.checkUserProjectAccess, ControllerProgetoTag.remove);
 route.post("/atualizarProjetoTags", middlewares.checkUserProjectAccess, ControllerProgetoTag.updateMany);
 
-//ProjetoUsuario
-route.post("/atualizarProjetoUsuarios", middlewares.checkUserProjectAccess, ControllerProjetoUsuario.updateMany);
-
-// Export router
+//UsuarioProjeto
+route.post("/atualizarProjetoUsuarios", middlewares.checkUserProjectAccess, ControllerUsuarioProjeto.updateMany);
 
 // Export router
 module.exports = route;
