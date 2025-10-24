@@ -11,10 +11,8 @@ module.exports = {
     },
     async postCreate(req, res) {
         try {
-            // Primeiro, criar o projeto
             const projeto = await db.Projeto.create(req.body);
             
-            // Encontrar o usuário atual
             const usuario = await db.Usuario.findOne({
                 where: { email: req.session.email }
             });
@@ -36,7 +34,6 @@ module.exports = {
     // List
     async getList(req, res) {
         try {
-            // Buscar projetos com seus usuários vinculados
             const projetos = await db.Projeto.findAll();
 
             // Buscar as vinculações do usuário atual
@@ -49,12 +46,10 @@ module.exports = {
             // Criar um Set dos IDs de projetos que o usuário tem acesso
             const userProjectIds = new Set(userLinks.map(link => link.projetoId));
 
-            // Processar cada projeto para adicionar flag de permissão
             const projetosProcessados = projetos.map(projeto => {
                 const projetoJSON = projeto.toJSON();
                 // Usuário pode editar se for admin ou se estiver vinculado ao projeto
                 projetoJSON.canEdit = req.session.tipo === 'admin' || userProjectIds.has(projeto.id);
-                // Se o usuário está vinculado ao projeto, tem as mesmas permissões que um admin
                 if (userProjectIds.has(projeto.id)) {
                     projetoJSON.canEdit = true;
                 }
@@ -74,7 +69,6 @@ module.exports = {
     //Update
     async getUpdate(req, res) {
         try {
-            // Load projeto including its Tags and Usuarios
             const projeto = await db.Projeto.findByPk(req.params.id, {
                 include: [
                     { model: db.Tag },
@@ -90,18 +84,16 @@ module.exports = {
 
             const projetoData = projeto.dataValues;
 
-            // Collect linked tag ids and user ids
             const linkedTagIds = projeto.Tags ? projeto.Tags.map(t => t.id) : [];
             const linkedUserIds = projeto.Usuarios ? projeto.Usuarios.map(u => u.id) : [];
 
-            // Add linked flag to tags
             const tagsWithFlag = tags.map(t => {
                 const json = t.toJSON();
                 json.linked = linkedTagIds.includes(json.id);
                 return json;
             });
 
-            // Determine if user can edit based on admin status or project association
+            // determinar permissão de edição por admin ou vínculo de usuário
             const canEdit = req.session.tipo === 'admin' || 
                           (projeto.Usuarios && 
                            projeto.Usuarios.some(u => u.email === req.session.email));

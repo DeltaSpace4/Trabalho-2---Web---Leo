@@ -7,14 +7,12 @@ async function initDB() {
     await db.sequelize.authenticate();
     console.log('Connected to database.');
 
-    // Create/update tables to match models
     await db.sequelize.sync();
     console.log('\nDatabase synchronized. Tables created/updated.');
 
 
     const hashedPassword = await bcrypt.hash('123', saltRounds);
 
-    // Create a test user to verify
     const Usuario = await db.Usuario.create({
       nome: 'Test',
       senha: hashedPassword,

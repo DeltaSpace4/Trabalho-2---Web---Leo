@@ -14,8 +14,6 @@ db.ProjetoTag = require('../Models/ProjetoTag.js')(sequelize, Sequelize);
 db.UsuarioProjeto = require('../Models/UsuarioProjeto.js')(sequelize, Sequelize);
 db.UsuarioConhecimento = require('../Models/UsuarioConhecimento.js')(sequelize, Sequelize);
 
-// Relacionamentos entre as tabelas -- Atualizar
-
 db.Projeto.belongsToMany(db.Tag, { through: db.ProjetoTag });
 db.Tag.belongsToMany(db.Projeto, { through: db.ProjetoTag });
 db.Projeto.belongsToMany(db.Usuario, { through: db.UsuarioProjeto });

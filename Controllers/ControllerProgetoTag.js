@@ -15,7 +15,6 @@ module.exports = {
                 return res.redirect('/home');
             }
 
-            // Use the Projeto model's association method
             const projeto = await db.Projeto.findByPk(projetoId);
             if (!projeto) {
                 console.log('Projeto not found:', projetoId);
@@ -37,7 +36,6 @@ module.exports = {
         ).catch(err => { console.log(err); });
     },
 
-    // Remove association between projeto and tag
     async remove(req, res) {
         try {
             const projetoId = req.params.projetoId;
@@ -62,11 +60,9 @@ module.exports = {
         }
     },
 
-    // Bulk update associations: replace project's tags with provided tagIds
     async updateMany(req, res) {
         try {
             const projetoId = req.body.projetoId || req.params.projetoId;
-            // tagIds can be an array (multiple checkboxes) or a single value
             let tagIds = req.body.tagIds || req.body.tags;
 
             if (!projetoId) {
@@ -74,14 +70,12 @@ module.exports = {
                 return res.redirect('/home');
             }
 
-            // normalize tagIds to array of integers
             if (!tagIds) {
                 tagIds = [];
             } else if (!Array.isArray(tagIds)) {
                 tagIds = [tagIds];
             }
 
-            // Convert to integers
             tagIds = tagIds.map(id => parseInt(id, 10)).filter(Boolean);
 
             const projeto = await db.Projeto.findByPk(projetoId);
@@ -90,7 +84,6 @@ module.exports = {
                 return res.redirect('/home');
             }
 
-            // Replace associations in one operation
             await projeto.setTags(tagIds);
 
             return res.redirect('/atualizarProjeto/' + projetoId);

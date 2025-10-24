@@ -46,7 +46,6 @@ module.exports = {
                 });
             }
 
-            // Login successful
             req.session.email = user.email;
             req.session.userId = user.id;
             req.session.nome = user.nome;
@@ -83,7 +82,6 @@ module.exports = {
 
     async postCreate(req, res) {
         try {
-            // Validate required fields
             if (!req.body.nome || !req.body.email || !req.body.senha) {
                 return res.render('usuario/criarUsuario', {
                     error: 'Por favor, preencha todos os campos',
@@ -91,7 +89,6 @@ module.exports = {
                 });
             }
 
-            // Check if email already exists
             const existingUser = await db.Usuario.findOne({ 
                 where: { email: req.body.email } 
             });
@@ -112,7 +109,6 @@ module.exports = {
                 ativo: true
             });
 
-            // Log the user in automatically
             req.session.email = user.email;
             req.session.userId = user.id;
             res.locals.email = user.email;
@@ -153,13 +149,13 @@ module.exports = {
     async postUpdate(req, res) {
         try {
             const updateData = { ...req.body };
-            delete updateData.id; // Remove ID from update data
+            delete updateData.id; 
             
-            // If password is being updated, hash it
+            // hash de senha
             if (updateData.senha) {
                 updateData.senha = await bcrypt.hash(updateData.senha, saltRounds);
             } else {
-                delete updateData.senha; // Don't update password if not provided
+                delete updateData.senha; 
             }
 
             const [updated] = await db.Usuario.update(updateData, { 

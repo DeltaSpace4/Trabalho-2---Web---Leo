@@ -9,15 +9,13 @@ module.exports = {
         console.log('Session middleware - URL:', req.url, 'Method:', req.method);
         console.log('Session data:', req.session);
 
-        // Public routes that don't need authentication
+        // rotas públicas sem autenticação
         const publicRoutes = ['/', '/login', '/criarUsuario'];
         if (publicRoutes.includes(req.url) || req.url.startsWith('/css/') || req.url.startsWith('/images/')) {
             return next();
         }
 
-        // Check if user is logged in
         if (req.session.email) {
-            // Set locals for use in templates
             res.locals.email = req.session.email;
             res.locals.nome = req.session.nome;
             if (req.session.tipo === 'admin') {
@@ -29,27 +27,23 @@ module.exports = {
             return next();
         }
 
-        // Not logged in and trying to access protected route
-        console.log('Unauthorized access attempt, redirecting to login');
+        console.log('Login não autorizado');
         res.redirect('/');
     },
 
-    // Check if user can edit a project (is admin or linked via UsuarioProjeto)
     async checkUserProjectAccess(req, res, next) {
         try {
-            // admins can edit all projects
+            // admins pode acessar tudo
             if (req.session.tipo === 'admin') {
                 return next();
             }
 
-            // get projetoId from params, body or query
             const projetoId = req.params.id || req.body.id || req.query.projetoId;
             if (!projetoId) {
                 console.log('No projeto id found in request');
                 return res.redirect('/home');
             }
 
-            // Check if the user has access via UsuarioProjeto
             const usuarioProjeto = await db.UsuarioProjeto.findOne({
                 where: {
                     usuarioId: req.session.userId,
@@ -74,7 +68,6 @@ module.exports = {
                 res.locals.admin = (originalTipo === 'admin');
             });
 
-            // user is linked to project through UsuarioProjeto, allow access with admin privileges
             next();
         } catch (err) {
             console.error('Error checking project access:', err);
