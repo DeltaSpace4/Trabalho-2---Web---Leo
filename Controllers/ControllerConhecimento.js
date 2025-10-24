@@ -1,5 +1,18 @@
 const db = require('../Config/Db');
 const path = require('path');
+const db_mongoose = require('./config/Db_mongoose');
+
+async function LogarConhecimento(texto, req) {
+    try {
+        await LogConhecimento.create({
+            texto,
+            modificadorId: req.session.idUsuario,
+            modificadorEmail: req.session.email
+        });
+    } catch (err) {
+        console.error("Erro ao logar conhecimento:", err);
+    }
+}
 
 module.exports = {
     // Create
@@ -8,6 +21,7 @@ module.exports = {
     },
     async postCreate(req, res) {
         db.Conhecimento.create(req.body).then(() => {
+            LogarConhecimento( 'Conhecimento "${conhecimento.titulo}" foi criado.', req );
             res.redirect('/home');
         }).catch((err) => { console.log(err); });
     },
