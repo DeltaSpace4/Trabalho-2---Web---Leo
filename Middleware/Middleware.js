@@ -8,7 +8,7 @@ module.exports = {
         console.log('Session data:', req.session);
 
         // Public routes that don't need authentication
-        const publicRoutes = ['/', '/Login', '/CriarUsuario'];
+        const publicRoutes = ['/', '/login', '/criarUsuario'];
         if (publicRoutes.includes(req.url) || req.url.startsWith('/css/') || req.url.startsWith('/images/')) {
             return next();
         }

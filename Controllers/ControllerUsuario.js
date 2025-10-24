@@ -7,7 +7,7 @@ module.exports = {
 
     // Login
     async getLogin(req, res) {
-        res.render('Usuario/Login', { layout: 'NoMenu.handlebars' });
+        res.render('usuario/login', { layout: 'NoMenu.handlebars' });
     },
     async getLogout(req, res) {
         //res.cookie("userData", req.cookies.userData, { maxAge: 0, httpOnly: true });
@@ -17,20 +17,20 @@ module.exports = {
 
     async postLogin(req, res) {
         try {
-            console.log('Login attempt:', req.body);
+            console.log('Tentativa de Login:', req.body);
 
             if (!req.body.email || !req.body.senha) {
-                return res.render('Usuario/Login', {
+                return res.render('usuario/login', {
                     error: 'Por favor, preencha todos os campos',
                     layout: 'NoMenu'
                 });
             }
 
             const user = await db.Usuario.findOne({ where: { email: req.body.email } });
-            console.log('User found:', user ? 'Yes' : 'No');
+            console.log('Achou Usuario:', user ? 'Yes' : 'No');
 
             if (!user) {
-                return res.render('Usuario/Login', {
+                return res.render('usuario/login', {
                     error: 'Usuário não encontrado',
                     layout: 'NoMenu'
                 });
@@ -40,7 +40,7 @@ module.exports = {
             console.log('Password match:', passwordMatch ? 'Yes' : 'No');
 
             if (!passwordMatch) {
-                return res.render('Usuario/Login', {
+                return res.render('usuario/login', {
                     error: 'Senha incorreta',
                     layout: 'NoMenu'
                 });
@@ -59,10 +59,10 @@ module.exports = {
             }
 
             console.log('Login successful, session:', req.session);
-            return res.redirect('/Home');
+            return res.redirect('/home');
         } catch (err) {
             console.error('Login error:', err);
-            return res.render('Usuario/Login', {
+            return res.render('usuario/login', {
                 error: 'Erro ao fazer login. Tente novamente.',
                 layout: 'NoMenu'
             });
@@ -71,7 +71,7 @@ module.exports = {
 
     // Create
     async getCreate(req, res) {
-        res.render('Usuario/CriarUsuario', {
+        res.render('usuario/criarUsuario', {
             layout: 'NoMenu'
         });
     },
@@ -80,7 +80,7 @@ module.exports = {
         try {
             // Validate required fields
             if (!req.body.nome || !req.body.email || !req.body.senha) {
-                return res.render('Usuario/CriarUsuario', {
+                return res.render('usuario/criarUsuario', {
                     error: 'Por favor, preencha todos os campos',
                     layout: 'NoMenu'
                 });
@@ -92,7 +92,7 @@ module.exports = {
             });
             
             if (existingUser) {
-                return res.render('Usuario/CriarUsuario', {
+                return res.render('usuario/criarUsuario', {
                     error: 'Este email já está cadastrado',
                     layout: 'NoMenu'
                 });
@@ -117,10 +117,10 @@ module.exports = {
                 res.locals.admin = true;
             }
 
-            return res.redirect('/Home');
+            return res.redirect('/home');
         } catch (err) {
             console.error('Erro ao criar usuário:', err);
-            return res.render('Usuario/CriarUsuario', {
+            return res.render('usuario/criarUsuario', {
                 error: 'Erro ao criar usuário. Por favor, tente novamente.',
                 layout: 'NoMenu.handlebars'
             });
@@ -130,14 +130,14 @@ module.exports = {
     // List
     async getList(req, res) {
         db.Usuario.findAll().then(usuario => {
-            res.render('Usuario/UsuarioList', { usuario: usuario.map(user => user.toJSON()) });
+            res.render('usuario/listarUsuario', { usuario: usuario.map(user => user.toJSON()) });
         }).catch((err) => { console.log(err); });
     },
 
     //Update
     async getUpdate(req, res) {
         await db.Usuario.findByPk(req.params.id).then(
-            usuario => res.render('Usuario/UsuarioUpdate', { usuario: usuario.dataValues })
+            usuario => res.render('usuario/atualizarUsuario', { usuario: usuario.dataValues })
         ).catch(function (err) { console.log(err); });
     },
     async postUpdate(req, res) {
@@ -157,16 +157,16 @@ module.exports = {
             });
 
             if (updated) {
-                return res.redirect('/ListarUsuario');
+                return res.redirect('/listarUsuario');
             } else {
-                return res.render('Usuario/UsuarioUpdate', {
+                return res.render('usuario/atualizarUsuario', {
                     error: 'Usuário não encontrado',
                     usuario: updateData
                 });
             }
         } catch (err) {
             console.error('Update error:', err);
-            return res.render('Usuario/UsuarioUpdate', {
+            return res.render('usuario/atualizarUsuario', {
                 error: 'Erro ao atualizar usuário',
                 usuario: req.body
             });
@@ -176,7 +176,7 @@ module.exports = {
     //Delete
     async getDelete(req, res) {
         await db.Usuario.destroy({ where: { id: req.params.id } }).then(
-            () => res.render('Home')
+            () => res.render('home')
         ).catch(err => { console.log(err); });
     }
 }
