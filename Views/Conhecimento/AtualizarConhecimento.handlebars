@@ -1,6 +1,9 @@
 <form action="/atualizarConhecimento" method="post">
-    <input type="hidden" name="id" >
-    Atualizar nome do Conhecimento: <input type="text" name="nome"><br><br>
-
-    <input type="submit" value="Atualizar">
+    <input type="hidden" name="id" value={{conhecimento.id}}>
+    <div class="form-group">
+        <label for="inputNome">Novo Nome</label>
+        <input type="text" class="form-control" id="inputNome" name="nome">
+    </div>
+    <br><br>
+    <button type="submit" class="btn btn-primary">Atualizar Conhecimento</button>
 </form>

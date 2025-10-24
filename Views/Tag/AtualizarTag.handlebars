@@ -1,6 +1,9 @@
 <form action="/atualizarTag" method="post">
-    <input type="hidden" name="id" >
-    Nome: <input type="text" name="nome" required><br><br>
-
-    <input type="submit" value="Atualizar">
+    <input type="hidden" name="id" value={{tag.id}}>
+    <div class="form-group">
+        <label for="inputNome">Novo Nome</label>
+        <input type="text" class="form-control" id="inputNome" name="nome">
+    </div>
+    <br><br>
+    <button type="submit" class="btn btn-primary">Atualizar Tag</button>
 </form>

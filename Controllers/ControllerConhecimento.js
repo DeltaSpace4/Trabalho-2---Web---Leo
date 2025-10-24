@@ -15,7 +15,7 @@ module.exports = {
     // List
     async getList(req, res) {
         db.Conhecimento.findAll().then(conhecimento => {
-            res.render('conhecimento/listarConhecimento', { conhecimentos: conhecimento.map(c => c.toJSON()) });
+            res.render('conhecimento/listarConhecimento', { conhecimento: conhecimento.map(c => c.toJSON()) });
         }).catch((err) => { console.log(err); });
     },
 
@@ -27,14 +27,14 @@ module.exports = {
     },
     async postUpdate(req, res) {
         await db.Conhecimento.update(req.body, { where: { id: req.body.id } }).then(
-            () => res.render('home')
+            () => res.redirect('/listarConhecimento')
         ).catch(function (err) { console.log(err); });
     },
 
     //Delete
     async getDelete(req, res) {
         await db.Conhecimento.destroy({ where: { id: req.params.id } }).then(
-            () => res.render('home')
+            () => res.redirect('/listarConhecimento')
         ).catch(err => { console.log(err); });
     }
 }

@@ -27,14 +27,14 @@ module.exports = {
     },
     async postUpdate(req, res) {
         await db.Tag.update(req.body, { where: { id: req.body.id } }).then(
-            () => res.render('home')
+            () => res.redirect('/listarTag')
         ).catch(function (err) { console.log(err); });
     },
 
     //Delete
     async getDelete(req, res) {
         await db.Tag.destroy({ where: { id: req.params.id } }).then(
-            () => res.render('home')
+            () => res.redirect('/listarTag')
         ).catch(err => { console.log(err); });
     }
 }

@@ -1,4 +1,25 @@
-<form action="/listarConhecimento" method="post">
-    ID do Conhecimneto: <input type="number" name="id" required><br><br>
-    <input type="submit" value="Consultar">
-</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">Nome</th>
+            <th scope="col">Id</th>
+            {{#if admin}}
+            <th scope="col">Editar</th>
+            <th scope="col">Deletar</th>
+            {{/if}}
+        </tr>
+    </thead>
+    <tbody>
+        {{#each conhecimento}}
+        <tr>
+            <th scope="row">{{nome}}</th>
+            <td>{{id}}</td>
+            {{#if ../admin}}
+            <td><a href="atualizarConhecimento/{{id}}">Editar</a></td>
+            <td><a href="deletarConhecimento/{{id}}">Deletar</a></td>
+            {{/if}}
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<a href="/home" class="btn btn-secondary">Voltar</a>
