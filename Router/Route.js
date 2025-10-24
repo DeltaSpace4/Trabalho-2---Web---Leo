@@ -50,38 +50,38 @@ route.get("/Home", function (req, res) {
 
 //Usuario
 route.get('/', ControllerUsuario.getLogin);
-route.post("/Login", ControllerUsuario.postLogin);
-route.get("/Logout", ControllerUsuario.getLogout);
-route.get("/CriarUsuario", ControllerUsuario.getCreate);
-route.post("/CriarUsuario", ControllerUsuario.postCreate);
-route.get("/ListarUsuario", ControllerUsuario.getList);
-route.get("/AtualizarUsuario/:id", ControllerUsuario.getUpdate);
-route.post("/AtualizarUsuario", ControllerUsuario.postUpdate);
-route.get("/DeletarUsuario/:id", ControllerUsuario.getDelete);
+route.post("/login", ControllerUsuario.postLogin);
+route.get("/logout", ControllerUsuario.getLogout);
+route.get("/criarUsuario", ControllerUsuario.getCreate);
+route.post("/criarUsuario", ControllerUsuario.postCreate);
+route.get("/listarUsuario", ControllerUsuario.getList);
+route.get("/atualizarUsuario/:id", ControllerUsuario.getUpdate);
+route.post("/atualizarUsuario", ControllerUsuario.postUpdate);
+route.get("/deletarUsuario/:id", ControllerUsuario.getDelete);
 
 //Conhecimento
-route.get("/CriarConhecimento", ControllerConhecimento.getCreate);
-route.post("/CriarConhecimento", ControllerConhecimento.postCreate);
-route.get("/ListarConhecimento", ControllerConhecimento.getList);
-route.get("/AtualizarConhecimento/:id", ControllerConhecimento.getUpdate);
-route.post("/AtualizarConhecimento", ControllerConhecimento.postUpdate);
-route.get("/DeletarConhecimento/:id", ControllerConhecimento.getDelete);
+route.get("/criarConhecimento", ControllerConhecimento.getCreate);
+route.post("/criarConhecimento", ControllerConhecimento.postCreate);
+route.get("/listarConhecimento", ControllerConhecimento.getList);
+route.get("/atualizarConhecimento/:id", ControllerConhecimento.getUpdate);
+route.post("/atualizarConhecimento", ControllerConhecimento.postUpdate);
+route.get("/deletarConhecimento/:id", ControllerConhecimento.getDelete);
 
 //Projeto
-route.get("/CriarProjeto", ControllerProjeto.getCreate);
-route.post("/CriarProjeto", ControllerProjeto.postCreate);
-route.get("/ListarProjeto", ControllerProjeto.getList);
-route.get("/AtualizarProjeto/:id", ControllerProjeto.getUpdate);
-route.post("/AtualizarProjeto", ControllerProjeto.postUpdate);
-route.get("/DeletarProjeto/:id", ControllerProjeto.getDelete);
+route.get("/criarProjeto", ControllerProjeto.getCreate);
+route.post("/criarProjeto", ControllerProjeto.postCreate);
+route.get("/listarProjeto", ControllerProjeto.getList);
+route.get("/atualizarProjeto/:id", ControllerProjeto.getUpdate);
+route.post("/atualizarProjeto", ControllerProjeto.postUpdate);
+route.get("/deletarProjeto/:id", ControllerProjeto.getDelete);
 
 //Tag
-route.get("/CriarTag", ControllerTag.getCreate);
-route.post("/CriarTag", ControllerTag.postCreate);
-route.get("/ListarTag", ControllerTag.getList);
-route.get("/AtualizarTag/:id", ControllerTag.getUpdate);
-route.post("/AtualizarTag", ControllerTag.postUpdate);
-route.get("/DeletarTag/:id", ControllerTag.getDelete);
+route.get("/criarTag", ControllerTag.getCreate);
+route.post("/criarTag", ControllerTag.postCreate);
+route.get("/listarTag", ControllerTag.getList);
+route.get("/atualizarTag/:id", ControllerTag.getUpdate);
+route.post("/atualizarTag", ControllerTag.postUpdate);
+route.get("/deletarTag/:id", ControllerTag.getDelete);
 
 
 // Export router
