@@ -34,10 +34,10 @@ const upload = multer({ storage: storage });
 
 
 //Home
-route.get("/Home", function (req, res) { 
+route.get("/home", function (req, res) { 
     console.log('Home route - Session:', req.session);
     if (req.session.email) { 
-        res.render('Home', {
+        res.render('home', {
             layout: 'main',
             email: req.session.email,
             nome: req.session.nome,
