@@ -7,7 +7,6 @@ const ControllerTag = require('../Controllers/ControllerTag');
 const ControllerUsuario = require('../Controllers/ControllerUsuario');
 const ControllerProgetoTag = require('../Controllers/ControllerProgetoTag');
 const ControllerProjetoUsuario = require('../Controllers/ControllerProjetoUsuario');
-const ControllerUsuarioConhecimento = require('../Controllers/ControllerUsuarioConhecimento');
 const middlewares = require('../Middleware/Middleware');
 
 
@@ -97,10 +96,6 @@ route.post("/atualizarProjetoTags", middlewares.checkUserProjectAccess, Controll
 
 //ProjetoUsuario
 route.post("/atualizarProjetoUsuarios", middlewares.checkUserProjectAccess, ControllerProjetoUsuario.updateMany);
-
-//UsuarioConhecimento
-route.get("/listarUsuarioConhecimento", ControllerUsuarioConhecimento.getList);
-route.post("/atualizarUsuarioConhecimentos", ControllerUsuarioConhecimento.updateMany);
 
 // Export router
 

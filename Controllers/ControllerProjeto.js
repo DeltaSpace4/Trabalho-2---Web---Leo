@@ -82,11 +82,6 @@ module.exports = {
                 ]
             });
             const tags = await db.Tag.findAll();
-            
-            // Buscar todos os usuários
-            const usuarios = await db.Usuario.findAll({
-                attributes: ['id', 'nome', 'email', 'tipo']
-            });
 
             if (!projeto) {
                 console.log('Projeto not found:', req.params.id);
@@ -99,7 +94,7 @@ module.exports = {
             const linkedTagIds = projeto.Tags ? projeto.Tags.map(t => t.id) : [];
             const linkedUserIds = projeto.Usuarios ? projeto.Usuarios.map(u => u.id) : [];
 
-            // Add linked flag to tags and users
+            // Add linked flag to tags
             const tagsWithFlag = tags.map(t => {
                 const json = t.toJSON();
                 json.linked = linkedTagIds.includes(json.id);
@@ -111,17 +106,9 @@ module.exports = {
                           (projeto.Usuarios && 
                            projeto.Usuarios.some(u => u.email === req.session.email));
 
-            // Adicionar flag 'linked' aos usuários
-            const usuariosWithFlag = usuarios.map(u => {
-                const json = u.toJSON();
-                json.linked = linkedUserIds.includes(json.id);
-                return json;
-            });
-
             return res.render('projeto/atualizarProjeto', {
                 projeto: projetoData,
                 tag: tagsWithFlag,
-                usuarios: usuariosWithFlag,
                 canEdit: canEdit
             });
         } catch (err) {
