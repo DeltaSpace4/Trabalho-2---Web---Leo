@@ -1,8 +1,17 @@
 <form action="/atualizarProjeto" method="post">
-    <input type="hidden" name="id" >
-    Novo Nome: <input type="text" name="nome"><br><br>
-    Novo Resumo: <input type="text" name="resumo"><br><br>
-    Novo Link: <input type="text" name="link"><br><br>
-
-    <input type="submit" value="Atualizar">
+    <input type="hidden" name="id" value={{projeto.id}}>
+    <div class="form-group">
+        <label for="inputNome">Novo Nome</label>
+        <input type="text" class="form-control" id="inputNome" name="nome">
+    </div>
+    <div class="form-group">
+        <label for="inputResumo">Novo Resumo</label>
+        <input type="text" class="form-control" id="inputResumo" name="resumo">
+    </div>
+    <div class="form-group">
+        <label for="inputLink">Novo Link</label>
+        <input type="text" class="form-control" id="inputLink" name="link">
+    </div>
+    <br><br>
+    <button type="submit" class="btn btn-primary">Atualizar Projeto</button>
 </form>

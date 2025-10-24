@@ -18,7 +18,7 @@ module.exports = {
     // List
     async getList(req, res) {
         db.Projeto.findAll().then(projeto => {
-            res.render('projeto/listarProjeto', { projetos: projeto.map(pr => pr.toJSON()) });
+            res.render('projeto/listarProjeto', { projeto: projeto.map(pr => pr.toJSON()) });
         }).catch((err) => { console.log(err); });
     },
 
@@ -30,14 +30,14 @@ module.exports = {
     },
     async postUpdate(req, res) {
         await db.Projeto.update(req.body, { where: { id: req.body.id } }).then(
-            () => res.render('home')
+            () => res.redirect('/listarProjeto')
         ).catch(function (err) { console.log(err); });
     },
 
     //Delete
     async getDelete(req, res) {
         await db.Projeto.destroy({ where: { id: req.params.id } }).then(
-            () => res.render('home')
+            () => res.redirect('/listarProjeto')
         ).catch(err => { console.log(err); });
     }
 }

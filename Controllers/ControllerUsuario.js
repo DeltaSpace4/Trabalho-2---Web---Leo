@@ -186,7 +186,7 @@ module.exports = {
     //Delete
     async getDelete(req, res) {
         await db.Usuario.destroy({ where: { id: req.params.id } }).then(
-            () => res.render('home')
+            () => res.redirect('/listarUsuario')
         ).catch(err => { console.log(err); });
     }
 }

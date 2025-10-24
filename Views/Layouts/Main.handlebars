@@ -32,8 +32,6 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownUsuarios">
                                 {{#if admin}}
                                 <a class="dropdown-item" href="/criarUsuario">Criar</a>
-                                <a class="dropdown-item" href="/atualizarUsuario">Editar</a>
-                                <a class="dropdown-item" href="/deletarUsuario">Deletar</a>
                                 {{/if}}
                                 <a class="dropdown-item" href="/listarUsuario">Listar</a>
                             </div>
@@ -45,17 +43,13 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownProjetos">
                                 {{#if admin}}
-                                <a class="dropdown-item" href="/projetoCreate">Criar</a>
-                                <a class="dropdown-item" href="/projetoUpdate">Editar</a>
-                                <a class="dropdown-item" href="/projetoDelete">Deletar</a>
-                                <a class="dropdown-item" href="/projetoList">Listar</a>
+                                <a class="dropdown-item" href="/criarProjeto">Criar</a>
+                                <a class="dropdown-item" href="/listarProjeto">Listar</a>
                                 {{else if aluno}}
-                                <a class="dropdown-item" href="/projetoCreate">Criar</a>
-                                <a class="dropdown-item" href="/projetoUpdate">Editar</a>
-                                <a class="dropdown-item" href="/projetoDelete">Deletar</a>
-                                <a class="dropdown-item" href="/projetoList">Listar</a>
+                                <a class="dropdown-item" href="/criarProjeto">Criar</a>
+                                <a class="dropdown-item" href="/listarProjeto">Listar</a>
                                 {{else}}
-                                <a class="dropdown-item" href="/projetoList">Listar</a>
+                                <a class="dropdown-item" href="/listarProjeto">Listar</a>
                                 {{/if}}
                             </div>
                         </li>
@@ -66,11 +60,9 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownConhecimentos">
                                 {{#if admin}}
-                                <a class="dropdown-item" href="/conhecimentoCreate">Criar</a>
-                                <a class="dropdown-item" href="/conhecimentoUpdate">Editar</a>
-                                <a class="dropdown-item" href="/conhecimentoDelete">Deletar</a>
+                                <a class="dropdown-item" href="/criarConhecimento">Criar</a>
                                 {{/if}}
-                                <a class="dropdown-item" href="/conhecimentoList">Listar</a>
+                                <a class="dropdown-item" href="/listarConhecimento">Listar</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
