@@ -1,7 +1,31 @@
-<form action="/CriarUsuario" method="post">
+<h2>Criar Nova Conta</h2>
 
-    Nome: <input type="text" name="nome"><br><br>
-    Matrícula: <input type="text" name="matricula"><br><br>
-    Curso: <input type="text" name="curso"><br><br>
-    <input type="submit" value="Cadastrar">
+{{#if error}}
+<div class="alert alert-danger" role="alert">
+    {{error}}
+</div>
+{{/if}}
+
+<form action="/CriarUsuario" method="POST">
+    <div class="form-group">
+        <label for="inputNome">Nome</label>
+        <input type="text" class="form-control" id="inputNome" name="nome" required>
+    </div>
+    <div class="form-group">
+        <label for="inputEmail">Email</label>
+        <input type="email" class="form-control" id="inputEmail" name="email" required>
+    </div>
+    <div class="form-group">
+        <label for="inputSenha">Senha</label>
+        <input type="password" class="form-control" id="inputSenha" name="senha" required>
+    </div>
+    <div class="form-group">
+        <label for="inputTipo">Tipo</label>
+        <select class="form-control" id="inputTipo" name="tipo">
+            <option value="aluno">Aluno</option>
+            <option value="admin">Administrador</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Criar Conta</button>
+    <a href="/Home" class="btn btn-secondary">Voltar</a>
 </form>

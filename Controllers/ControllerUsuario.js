@@ -71,8 +71,8 @@ module.exports = {
 
     // Create
     async getCreate(req, res) {
-        res.render('Usuario/UsuarioCreate', { 
-            layout: 'NoMenu.handlebars' 
+        res.render('Usuario/CriarUsuario', {
+            layout: 'NoMenu'
         });
     },
 
@@ -80,9 +80,9 @@ module.exports = {
         try {
             // Validate required fields
             if (!req.body.nome || !req.body.email || !req.body.senha) {
-                return res.render('Usuario/UsuarioCreate', {
+                return res.render('Usuario/CriarUsuario', {
                     error: 'Por favor, preencha todos os campos',
-                    layout: 'NoMenu.handlebars'
+                    layout: 'NoMenu'
                 });
             }
 
@@ -92,9 +92,9 @@ module.exports = {
             });
             
             if (existingUser) {
-                return res.render('Usuario/UsuarioCreate', {
+                return res.render('Usuario/CriarUsuario', {
                     error: 'Este email já está cadastrado',
-                    layout: 'NoMenu.handlebars'
+                    layout: 'NoMenu'
                 });
             }
 
@@ -120,7 +120,7 @@ module.exports = {
             return res.redirect('/Home');
         } catch (err) {
             console.error('Erro ao criar usuário:', err);
-            return res.render('Usuario/UsuarioCreate', {
+            return res.render('Usuario/CriarUsuario', {
                 error: 'Erro ao criar usuário. Por favor, tente novamente.',
                 layout: 'NoMenu.handlebars'
             });

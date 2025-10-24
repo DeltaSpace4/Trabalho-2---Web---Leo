@@ -1,4 +1,6 @@
 const db = require('../Config/Db');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 async function initDB() {
   try {
@@ -9,10 +11,13 @@ async function initDB() {
     await db.sequelize.sync();
     console.log('\nDatabase synchronized. Tables created/updated.');
 
+
+    const hashedPassword = await bcrypt.hash('123', saltRounds);
+
     // Create a test user to verify
     const testUser = await db.Usuario.create({
       nome: 'Test',
-      senha: 'test123',
+      senha: hashedPassword,
       email: 'test@example.com',
       tipo: 'admin'
     });
