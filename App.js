@@ -5,6 +5,13 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 const middlewares = require('./Middleware/Middleware');
 const app = express();
+const db_mongoose = require('./Config/Db_mongoose'); 
+const mongoose= require('mongoose'); 
+
+mongoose.connect(db_mongoose.connection).then (() => 
+    { console.log('Conectado ao MongoDB com Mongoose'); }).catch(()=> 
+        { console.log ('Erro ao connectar com Mongo'); });
+
 
 /* Setup do Express */
 const path = require('path');
