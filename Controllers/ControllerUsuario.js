@@ -126,8 +126,8 @@ module.exports = {
             }
 
             //log mongo
-            await logUsuario.logarUsuario('Usuário '+req.body.nome+' Criado', req.session.userId, req.session.email);
-            
+            await logUsuario.logarUsuario('Usuário '+req.body.nome+' criado', req.session.userId, req.session.email);
+
             return res.redirect('/home');
         } catch (err) {
             console.error('Erro ao criar usuário:', err);
@@ -168,6 +168,8 @@ module.exports = {
             });
 
             if (updated) {
+            //log mongo
+            await logUsuario.logarUsuario('Usuário '+req.body.nome+' atualizado', req.session.userId, req.session.email);
                 return res.redirect('/listarUsuario');
             } else {
                 return res.render('usuario/atualizarUsuario', {
@@ -186,6 +188,9 @@ module.exports = {
 
     //Delete
     async getDelete(req, res) {
+        //log mongo se tiver await o delet tem prioridade
+        db.Usuario.findOne({ where: { id: req.params.id } }).then(
+        logUsuario.logarUsuario('Usuário '+req.params.id+' deletado', req.session.userId, req.session.email))
         await db.Usuario.destroy({ where: { id: req.params.id } }).then(
             () => res.redirect('/listarUsuario')
         ).catch(err => { console.log(err); });

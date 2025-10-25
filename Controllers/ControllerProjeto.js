@@ -27,7 +27,7 @@ module.exports = {
             await projeto.addUsuario(usuario);
             
             //log mongo
-            await logProjeto.logarProjeto('Projeto '+req.body.nome+' Criado', req.session.userId, req.session.email);
+            await logProjeto.logarProjeto('Projeto '+req.body.nome+' criado', req.session.userId, req.session.email);
 
             res.redirect('/home');
         }
@@ -118,7 +118,7 @@ module.exports = {
         await db.Projeto.update(req.body, { where: { id: req.body.id } }).then(
             () => res.redirect('/listarProjeto'),
     //log mongo
-        await logProjeto.logarProjeto('Projeto '+req.body.nome+' Atualizado', req.session.userId, req.session.email)
+        await logProjeto.logarProjeto('Projeto '+req.body.nome+' atualizado', req.session.userId, req.session.email)
         ).catch(function (err) { console.log(err); });
     },
 
@@ -126,7 +126,7 @@ module.exports = {
     async getDelete(req, res) {
     //log mongo se tiver await o delet tem prioridade
         db.Projeto.findOne({ where: { id: req.params.id } }).then(
-        logProjeto.logarProjeto('Projeto '+req.params.id+' Deletado', req.session.userId, req.session.email))
+        logProjeto.logarProjeto('Projeto '+req.params.id+' deletado', req.session.userId, req.session.email))
         await db.Projeto.destroy({ where: { id: req.params.id } }).then(
             () => res.redirect('/listarProjeto')
         ).catch(err => { console.log(err); });
