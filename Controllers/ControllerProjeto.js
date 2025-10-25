@@ -1,6 +1,7 @@
 const db = require('../Config/Db');
 const path = require('path');
 const logProjeto = require('../Models/NoSql/LogProjeto');
+const { where } = require('../Models/NoSql/LogUsuario');
 
 module.exports = {
     // Create
@@ -115,12 +116,17 @@ module.exports = {
     },
     async postUpdate(req, res) {
         await db.Projeto.update(req.body, { where: { id: req.body.id } }).then(
-            () => res.redirect('/listarProjeto')
+            () => res.redirect('/listarProjeto'),
+    //log mongo
+        await logProjeto.logarProjeto('Projeto '+req.body.nome+' Atualizado', req.session.userId, req.session.email)
         ).catch(function (err) { console.log(err); });
     },
 
     //Delete
     async getDelete(req, res) {
+    //log mongo se tiver await o delet tem prioridade
+        db.Projeto.findOne({ where: { id: req.params.id } }).then(
+        logProjeto.logarProjeto('Projeto '+req.params.id+' Deletado', req.session.userId, req.session.email))
         await db.Projeto.destroy({ where: { id: req.params.id } }).then(
             () => res.redirect('/listarProjeto')
         ).catch(err => { console.log(err); });
