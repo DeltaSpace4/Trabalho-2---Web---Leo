@@ -1,5 +1,6 @@
 const db = require('../Config/Db');
 const path = require('path');
+const logProjeto = require('../Models/NoSql/LogProjeto');
 
 module.exports = {
     // Create
@@ -23,9 +24,13 @@ module.exports = {
 
             // Vincular o projeto ao usuário que o criou
             await projeto.addUsuario(usuario);
+            
+            //log mongo
+            await logProjeto.logarProjeto('Usuário '+req.body.nome+' Criado', req.session.userId, req.session.email);
 
             res.redirect('/home');
-        } catch (err) {
+        }
+         catch (err) {
             console.log(err);
             res.status(500).json({ error: err.message });
         }

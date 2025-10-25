@@ -7,4 +7,18 @@ const LogProjetoSchema = new Schema({
   modificadorEmail: { type: String, required: true },
 }, { timestamps: true });
 
+LogProjetoSchema.statics.logarProjeto = async function(texto, modificadorId, modificadorEmail) {
+  try {
+    const log = new this({
+      texto,
+      modificadorId,
+      modificadorEmail
+    });
+    await log.save();
+    console.log("Log salvo:", texto);
+  } catch (err) {
+    console.error("Erro ao salvar log:", err.message);
+    throw err; 
+  }
+};
 module.exports = mongoose.model('logProjeto', LogProjetoSchema);

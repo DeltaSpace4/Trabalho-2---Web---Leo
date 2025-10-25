@@ -3,7 +3,7 @@ const path = require('path');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 const db_mongoose = require('../Config/Db_mongoose'); 
-const Usuario = require('../Models/NoSql/LogUsuario');
+const logUsuario = require('../Models/NoSql/LogUsuario');
 
 module.exports = {
 
@@ -124,7 +124,10 @@ module.exports = {
                 req.session.tipo = 'aluno';
                 res.locals.aluno = true;
             }
-            await LogUsuario.logarUsuario('Usuário "${req.body.nome}" Criado', req.session.userId, req.session.email);
+
+            //log mongo
+            await logUsuario.logarUsuario('Usuário '+req.body.nome+' Criado', req.session.userId, req.session.email);
+            
             return res.redirect('/home');
         } catch (err) {
             console.error('Erro ao criar usuário:', err);

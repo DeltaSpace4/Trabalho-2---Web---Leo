@@ -7,9 +7,19 @@ const LogUsuarioSchema = new Schema({
   modificadorEmail: { type: String, required: true },
 }, { timestamps: true });
 
-LogUsuarioSchema.statics.logarUsuario = async function (texto, modificadorId, modificadorEmail) {
-  const novoLog = new this({ texto, modificadorId, modificadorEmail });
-  return await novoLog.save();
+LogUsuarioSchema.statics.logarUsuario = async function(texto, modificadorId, modificadorEmail) {
+  try {
+    const log = new this({
+      texto,
+      modificadorId,
+      modificadorEmail
+    });
+    await log.save();
+    console.log("Log salvo:", texto);
+  } catch (err) {
+    console.error("Erro ao salvar log:", err.message);
+    throw err; 
+  }
 };
 
 module.exports = mongoose.model('logUsuario', LogUsuarioSchema);

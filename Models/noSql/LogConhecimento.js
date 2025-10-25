@@ -7,8 +7,19 @@ const LogConhecimentoSchema = new Schema({
   modificadorEmail: { type: String, required: true },
 }, { timestamps: true });
 
-LogConhecimentoSchema.methods.LogarConhecimento = function(texto, modificadorId, modificadorEmail) {
-   
-}
+LogConhecimentoSchema.statics.logarConhecimento = async function(texto, modificadorId, modificadorEmail) {
+  try {
+    const log = new this({
+      texto,
+      modificadorId,
+      modificadorEmail
+    });
+    await log.save();
+    console.log("Log salvo:", texto);
+  } catch (err) {
+    console.error("Erro ao salvar log:", err.message);
+    throw err; 
+  }
+};
 
 module.exports = mongoose.model('logConhecimento', LogConhecimentoSchema);
