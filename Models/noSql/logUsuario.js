@@ -7,4 +7,9 @@ const LogUsuarioSchema = new Schema({
   modificadorEmail: { type: String, required: true },
 }, { timestamps: true });
 
+LogUsuarioSchema.statics.logarUsuario = async function (texto, modificadorId, modificadorEmail) {
+  const novoLog = new this({ texto, modificadorId, modificadorEmail });
+  return await novoLog.save();
+};
+
 module.exports = mongoose.model('logUsuario', LogUsuarioSchema);

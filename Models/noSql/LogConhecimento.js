@@ -7,4 +7,8 @@ const LogConhecimentoSchema = new Schema({
   modificadorEmail: { type: String, required: true },
 }, { timestamps: true });
 
+LogConhecimentoSchema.methods.LogarConhecimento = function(texto, modificadorId, modificadorEmail) {
+   
+}
+
 module.exports = mongoose.model('logConhecimento', LogConhecimentoSchema);
