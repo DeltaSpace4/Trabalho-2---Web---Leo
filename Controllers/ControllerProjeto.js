@@ -26,7 +26,7 @@ module.exports = {
             await projeto.addUsuario(usuario);
             
             //log mongo
-            await logProjeto.logarProjeto('Usuário '+req.body.nome+' Criado', req.session.userId, req.session.email);
+            await logProjeto.logarProjeto('Projeto '+req.body.nome+' Criado', req.session.userId, req.session.email);
 
             res.redirect('/home');
         }
