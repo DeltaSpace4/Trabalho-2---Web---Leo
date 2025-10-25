@@ -1,5 +1,6 @@
 const db = require('../Config/Db');
 const path = require('path');
+const logProjeto = require('../Models/NoSql/LogProjeto');
 
 module.exports = {
     // Create
@@ -8,23 +9,27 @@ module.exports = {
             const projetoId = req.params.projetoId || req.body.projetoId;
             const tagId = req.params.tagId || req.body.tagId;
             
-            console.log('Creating ProjetoTag with:', { projetoId, tagId });
+            console.log('Criando ProjetoTag com:', { projetoId, tagId });
             
             if (!projetoId || !tagId) {
-                console.log('Missing projetoId or tagId');
+                console.log('Faltando projetoId or tagId');
                 return res.redirect('/home');
             }
 
             const projeto = await db.Projeto.findByPk(projetoId);
             if (!projeto) {
-                console.log('Projeto not found:', projetoId);
+                console.log('Projeto não encontrado:', projetoId);
                 return res.redirect('/home');
             }
 
             await projeto.addTag(tagId);
+
+            //mongo log
+            await logProjeto.logarProjeto('Tag ID '+tagId+' vinculada ao Projeto ID '+projetoId, req.session.userId, req.session.email);
+
             return res.redirect('/atualizarProjeto/' + projetoId);
         } catch (err) {
-            console.error('Error in postCreate:', err);
+            console.error('Erro em postCreate:', err);
             return res.redirect('/home');
         }
     },
@@ -42,20 +47,24 @@ module.exports = {
             const tagId = req.params.tagId;
 
             if (!projetoId || !tagId) {
-                console.log('Missing projetoId or tagId for remove');
+                console.log('Faltnado projetoId ou tagId para remover');
                 return res.redirect('/home');
             }
 
             const projeto = await db.Projeto.findByPk(projetoId);
             if (!projeto) {
-                console.log('Projeto not found for remove:', projetoId);
+                console.log('Projeto não encontrado para remover:', projetoId);
                 return res.redirect('/home');
             }
 
             await projeto.removeTag(tagId);
+
+            //mongo log
+            await logProjeto.logarProjeto('Tag ID '+tagId+' desvinculada do Projeto ID '+projetoId, req.session.userId, req.session.email);
+
             return res.redirect('/atualizarProjeto/' + projetoId);
         } catch (err) {
-            console.error('Error removing ProjetoTag:', err);
+            console.error('Erro removendo ProjetoTag:', err);
             return res.redirect('/home');
         }
     },
@@ -66,7 +75,7 @@ module.exports = {
             let tagIds = req.body.tagIds || req.body.tags;
 
             if (!projetoId) {
-                console.log('Missing projetoId for updateMany');
+                console.log('Faltando projetoId para updateMany');
                 return res.redirect('/home');
             }
 
@@ -80,15 +89,18 @@ module.exports = {
 
             const projeto = await db.Projeto.findByPk(projetoId);
             if (!projeto) {
-                console.log('Projeto not found for updateMany:', projetoId);
+                console.log('Projeto não encontrado para updateMany:', projetoId);
                 return res.redirect('/home');
             }
 
             await projeto.setTags(tagIds);
+            
+            //Talvez daria para fazer um log mais detalhado aqui, verificar como que o updateMany está funcionando na prática
+            await logProjeto.logarProjeto('Tags atualizadas para Projeto ID '+projetoId, req.session.userId, req.session.email);
 
             return res.redirect('/atualizarProjeto/' + projetoId);
         } catch (err) {
-            console.error('Error in updateMany:', err);
+            console.error('Erro em updateMany:', err);
             return res.redirect('/home');
         }
     }

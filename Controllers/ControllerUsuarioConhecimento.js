@@ -1,5 +1,7 @@
 const db = require('../Config/Db');
 const path = require('path');
+const logUsuario = require('../Models/NoSql/LogUsuario');
+const { log } = require('console');
 
 module.exports = {
 
@@ -11,6 +13,8 @@ module.exports = {
     },
     async postUpdate(req, res) {
         await db.UsuarioConhecimento.update(req.body, { where: { id: req.body.id } }).then(
+            // mongo log
+            logUsuario.logarUsuario('Usuario teve o Conhecimento ID '+req.body.id+' Atualizado', req.session.userId, req.session.email),    
             () => res.render('home')
         ).catch(function (err) { console.log(err); });
     },
@@ -18,6 +22,8 @@ module.exports = {
     //Delete
     async getDelete(req, res) {
         await db.UsuarioConhecimento.destroy({ where: { id: req.params.id } }).then(
+            // mongo log
+            logUsuario.logarUsuario('Usuario teve o Conhecimento ID '+req.params.id+' Deletado', req.session.userId, req.session.email),
             () => res.render('home')
         ).catch(err => { console.log(err); });
     }

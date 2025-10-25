@@ -1,18 +1,6 @@
 const db = require('../Config/Db');
 const path = require('path');
-//const db_mongoose = require('./Config/Db_mongoose');
-
-async function LogarConhecimento(texto, req) {
-    try {
-        await LogConhecimento.create({
-            texto,
-            modificadorId: req.session.idUsuario,
-            modificadorEmail: req.session.email
-        });
-    } catch (err) {
-        console.error("Erro ao logar conhecimento:", err);
-    }
-}
+const LogConhecimento = require('../Models/NoSql/LogConhecimento');
 
 module.exports = {
     // Create
@@ -21,7 +9,9 @@ module.exports = {
     },
     async postCreate(req, res) {
         db.Conhecimento.create(req.body).then(() => {
-            LogarConhecimento( 'Conhecimento "${conhecimento.titulo}" foi criado.', req );
+
+            //log mongo
+            logConhecimento.logarConhecimento('Conhecimento '+req.body.titulo+' Criado', req.session.userId, req.session.email);
             res.redirect('/home');
         }).catch((err) => { console.log(err); });
     },
@@ -41,12 +31,14 @@ module.exports = {
     },
     async postUpdate(req, res) {
         await db.Conhecimento.update(req.body, { where: { id: req.body.id } }).then(
+            logConhecimento.logarConhecimento('Conhecimento '+req.body.titulo+' Atualizado', req.session.userId, req.session.email),
             () => res.redirect('/listarConhecimento')
         ).catch(function (err) { console.log(err); });
     },
 
-    //Delete
+    //Delete    
     async getDelete(req, res) {
+        //
         await db.Conhecimento.destroy({ where: { id: req.params.id } }).then(
             () => res.redirect('/listarConhecimento')
         ).catch(err => { console.log(err); });
